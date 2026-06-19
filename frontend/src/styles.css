@@ -53,6 +53,7 @@ body {
   background-size: 420px 420px, 520px 520px, 620px 620px, 560px 560px;
   margin: 0;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 a {
@@ -1758,6 +1759,30 @@ button:hover {
     justify-content: flex-start;
   }
 
+  .navbar {
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .navbar nav {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-inline: -0.15rem;
+    overflow-x: auto;
+    padding: 0.15rem 0.15rem 0.55rem;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .navbar nav a {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .navbar .ghost-btn {
+    justify-self: stretch;
+  }
+
   .editor-line,
   .admin-row,
   .option-visual,
@@ -1783,12 +1808,140 @@ button:hover {
 }
 
 @media (max-width: 560px) {
+  body {
+    background-size: 320px 320px, 360px 360px, 420px 420px, 380px 380px;
+  }
+
   .page-wrap {
-    padding: 1rem;
+    padding: 0.75rem;
+  }
+
+  .stack {
+    gap: 0.85rem;
+  }
+
+  .auth-page {
+    background: var(--bg);
+    min-height: 100svh;
   }
 
   .auth-visual {
-    min-height: 320px;
+    min-height: 210px;
+    padding: 1.2rem;
+  }
+
+  .auth-visual h1 {
+    font-size: 2.45rem;
+  }
+
+  .auth-visual p {
+    font-size: 0.96rem;
+  }
+
+  .auth-logo {
+    height: 76px;
+    width: 76px;
+  }
+
+  .auth-card {
+    margin: 0.75rem;
+    padding: 1rem;
+  }
+
+  .auth-card-logo {
+    height: 68px;
+    width: 68px;
+  }
+
+  .navbar {
+    padding: 0.65rem 0.75rem;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brand img {
+    height: 34px;
+    width: 34px;
+  }
+
+  .brand strong,
+  .brand span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .navbar a {
+    min-height: 36px;
+    padding: 0 0.62rem;
+  }
+
+  .page-title,
+  .section-head {
+    padding: 0.85rem;
+  }
+
+  .page-title h1,
+  .section-head h1 {
+    font-size: 1.95rem;
+    line-height: 1.08;
+    text-shadow: 0 2px 0 rgba(17, 24, 39, 0.06);
+  }
+
+  .page-title p,
+  .section-head p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+  }
+
+  .module-grid,
+  .part-grid,
+  .level-grid,
+  .stats-grid,
+  .pricing-grid,
+  .module-summary-grid {
+    gap: 0.8rem;
+    grid-template-columns: 1fr;
+  }
+
+  .module-card,
+  .part-card,
+  .level-card,
+  .pricing-card,
+  .panel,
+  .question-card,
+  .stat-card {
+    border-width: 2px;
+    min-height: 0;
+    padding: 0.95rem;
+  }
+
+  .module-card svg,
+  .part-card svg,
+  .level-card svg {
+    height: 40px;
+    padding: 0.45rem;
+    width: 40px;
+  }
+
+  .access-row,
+  .source-pills,
+  .friend-list {
+    gap: 0.35rem;
+  }
+
+  .access-pill,
+  .eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .card-footer .button-link,
+  .card-footer button,
+  .part-card .button-link,
+  .pricing-card button {
+    width: 100%;
   }
 
   .quiz-actions {
@@ -1796,12 +1949,73 @@ button:hover {
     flex-direction: column;
   }
 
+  .quiz-title h1 {
+    font-size: 2.35rem;
+  }
+
   .quiz-hud {
-    grid-template-columns: auto auto auto;
+    gap: 0.5rem;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hud-timer {
+    grid-column: 1 / -1;
+    justify-content: center;
+    justify-self: stretch;
+  }
+
+  .hud-score {
+    justify-content: center;
+  }
+
+  .hud-score strong,
+  .hud-timer strong {
+    font-size: 1.45rem;
   }
 
   .hud-timer {
     padding: 0.45rem 0.55rem;
+  }
+
+  .quiz-game-card {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .quiz-game-card h2 {
+    font-size: 1.55rem;
+    line-height: 1.2;
+    text-shadow:
+      0 1px 0 #fff,
+      0 3px 0 rgba(17, 24, 39, 0.14);
+  }
+
+  .quiz-game-card .options-list {
+    grid-template-columns: 1fr;
+  }
+
+  .option {
+    align-items: flex-start;
+    min-height: 0;
+    padding: 0.8rem;
+  }
+
+  .option span {
+    font-size: 0.98rem;
+    text-align: start;
+  }
+
+  .quiz-game-card .option-visual > span:last-child {
+    text-align: center;
+  }
+
+  .option-visual svg {
+    max-height: 150px;
+  }
+
+  .diagram-question img {
+    max-height: 260px;
+    width: 100%;
   }
 
   .quiz-actions button,
@@ -1817,5 +2031,96 @@ button:hover {
 
   .option-visual svg {
     max-width: 100%;
+  }
+
+  .premium-hero {
+    gap: 0.85rem;
+    padding: 1rem;
+  }
+
+  .premium-hero h1 {
+    font-size: 2rem;
+  }
+
+  .premium-status {
+    padding: 0.85rem;
+  }
+
+  .price-line strong {
+    font-size: 2rem;
+  }
+
+  .challenge-hero,
+  .profile-card-main,
+  .info-line,
+  .leader-row,
+  .competition-attempt-row,
+  .score-row,
+  .attempt-row {
+    grid-template-columns: 1fr;
+  }
+
+  .leader-row {
+    gap: 0.35rem;
+  }
+
+  .friend-form,
+  .competition-friend-form {
+    grid-template-columns: 1fr;
+  }
+
+  .friend-form button,
+  .competition-friend-form button {
+    min-height: 42px;
+    padding: 0 1rem;
+    width: 100%;
+  }
+
+  .table,
+  .admin-table {
+    margin-inline: -0.75rem;
+    padding-inline: 0.75rem;
+  }
+}
+
+@media (max-width: 390px) {
+  button,
+  .button-link,
+  input,
+  select,
+  textarea {
+    min-height: 40px;
+  }
+
+  .page-wrap {
+    padding: 0.6rem;
+  }
+
+  .auth-visual {
+    min-height: 180px;
+  }
+
+  .auth-visual h1,
+  .quiz-title h1 {
+    font-size: 2rem;
+  }
+
+  .page-title h1,
+  .section-head h1 {
+    font-size: 1.7rem;
+  }
+
+  .quiz-game-card h2 {
+    font-size: 1.35rem;
+  }
+
+  .module-card,
+  .part-card,
+  .level-card,
+  .pricing-card,
+  .panel,
+  .question-card,
+  .stat-card {
+    padding: 0.82rem;
   }
 }
