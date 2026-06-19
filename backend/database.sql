@@ -617,8 +617,10 @@ values
   ('22222222-2222-2222-2222-222222222222', 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaa4', false, false, 0)
 on conflict (user_id, level_id) do nothing;
 
-\ir db/proteines_seed.sql
-\ir db/module_quiz_seed.sql
+-- Supabase SQL Editor does not support psql include commands such as \ir.
+-- After this file succeeds, run these seed files separately:
+-- 1. backend/db/proteines_seed.sql
+-- 2. backend/db/module_quiz_seed.sql
 
 update levels
 set part_id = (select id from module_parts where slug = 'proteines')
