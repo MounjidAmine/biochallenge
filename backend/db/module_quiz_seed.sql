@@ -150,7 +150,7 @@ values
   ('31000000-0000-0000-0000-000000000037', '33333333-4444-5555-6666-000000000002', 'text_answer', 'Quel systÃ¨me augmente la frÃ©quence cardiaque ?', null, 'Le systÃ¨me nerveux sympathique.', 1),
   ('31000000-0000-0000-0000-000000000038', '33333333-4444-5555-6666-000000000002', 'text_answer', 'Quel systÃ¨me diminue la frÃ©quence cardiaque ?', null, 'Le systÃ¨me parasympathique.', 1),
   ('31000000-0000-0000-0000-000000000039', '33333333-4444-5555-6666-000000000002', 'text_answer', 'OÃ¹ se trouve le sang oxygÃ©nÃ© dans le cÂœur ?', null, 'Dans les cavitÃ©s gauches.', 1),
-  ('31000000-0000-0000-0000-000000000040', '33333333-4444-5555-6666-000000000002', 'text_answer', 'Ou se trouve le sang pauvre en oxygene ?', null, 'Dans les cavites droites.', 1)
+  ('31000000-0000-0000-0000-000000000040', '33333333-4444-5555-6666-000000000002', 'text_answer', 'Ou se trouve le sang pauvre en oxygene ?', null, 'Dans les cavites droites.', 1),
   ('40000000-0000-0000-0000-000000000001', '44444444-5555-6666-7777-000000000001', 'qcm_single', 'Quelle structure pulmonaire est le site principal des echanges gazeux ?', null, 'Bonne reponse : Alveoles.', 1),
   ('40000000-0000-0000-0000-000000000002', '44444444-5555-6666-7777-000000000001', 'qcm_single', 'Le surfactant pulmonaire a pour role principal :', null, 'Bonne reponse : Reduire la tension superficielle dans les alveoles.', 1),
   ('40000000-0000-0000-0000-000000000003', '44444444-5555-6666-7777-000000000001', 'qcm_single', 'Quelle cellule produit le surfactant dans les poumons ?', null, 'Bonne reponse : Pneumocyte de type II.', 1),
