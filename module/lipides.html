@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biochimie – Les Lipides · Fiches d'Exercices</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0c14;--surface:#111420;--surface2:#181d2e;
+  --green:#34d399;--gdim:#064e35;--gpal:#041f14;
+  --amber:#f0a500;--apal:#241900;
+  --teal:#2dd4bf;--tpal:#042820;
+  --purple:#a78bfa;--ppal:#140d2a;
+  --text:#dde3f0;--muted:#6b7a99;--border:#1f2640;--white:#f8faff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+header{background:linear-gradient(160deg,#0a0c14 0%,#1a0a04 40%,#0a0c14 100%);padding:3rem 2rem 2rem;text-align:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% -10%,rgba(240,165,0,.13) 0%,transparent 65%)}
+.badge{display:inline-flex;align-items:center;background:var(--apal);border:1px solid #6b4800;color:var(--amber);font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .85rem;border-radius:999px;margin-bottom:1rem;position:relative}
+header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.4rem);color:var(--white);position:relative}
+header h1 span{color:var(--amber)}
+header p{color:var(--muted);margin-top:.5rem;font-size:.9rem;position:relative;font-weight:300}
+.stats-bar{display:flex;justify-content:center;gap:2.5rem;margin-top:1.8rem;flex-wrap:wrap;position:relative}
+.stat{text-align:center}
+.stn{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--amber);line-height:1}
+.stl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.2rem}
+
+.tabs-wrap{max-width:1000px;margin:1.8rem auto 0;padding:0 1.5rem;display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.tab{padding:.5rem 1.2rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-family:'IBM Plex Sans',sans-serif;font-size:.82rem;cursor:pointer;transition:all .2s;white-space:nowrap}
+.tab:hover,.tab.a{border-color:#6b4800;color:var(--amber);background:var(--apal);font-weight:500}
+.tab.gr:hover,.tab.gr.a{border-color:var(--gdim);color:var(--green);background:var(--gpal)}
+.tab.te:hover,.tab.te.a{border-color:#065f52;color:var(--teal);background:var(--tpal)}
+
+main{max-width:1000px;margin:0 auto;padding:2rem 1.5rem 6rem}
+.panel{display:none}.panel.active{display:block}
+
+.sec-hd{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem}
+.sec-ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.ia{background:var(--apal);border:1px solid #6b4800}
+.ig{background:var(--gpal);border:1px solid var(--gdim)}
+.it{background:var(--tpal);border:1px solid #065f52}
+.sec-tx h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:var(--white)}
+.sec-tx p{font-size:.82rem;color:var(--muted);margin-top:.1rem;font-weight:300}
+
+.ctrl{display:flex;gap:.6rem;margin-bottom:1.4rem;flex-wrap:wrap;align-items:center}
+.btn{padding:.5rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:.82rem;cursor:pointer;transition:all .2s}
+.btn:hover{border-color:#6b4800;color:var(--amber)}
+.btn.grn:hover{border-color:var(--gdim);color:var(--green)}
+.btn.tel:hover{border-color:#065f52;color:var(--teal)}
+
+.scorebox{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.4rem;margin-bottom:1.4rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.scn{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1}
+.scl{font-size:.78rem;color:var(--muted);margin-top:.2rem}
+.plbl{font-size:.72rem;color:var(--muted);margin-bottom:.3rem;text-align:right}
+.pbar{background:var(--surface);border-radius:999px;height:5px;overflow:hidden;border:1px solid var(--border)}
+.pfill{height:100%;border-radius:999px;transition:width .4s;width:0%}
+.fa1{background:linear-gradient(90deg,#6b4800,var(--amber))}
+.fg1{background:linear-gradient(90deg,var(--gdim),var(--green))}
+.ft1{background:linear-gradient(90deg,#065f52,var(--teal))}
+
+/* EX1 QCM */
+.qc{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:1rem;overflow:hidden;transition:border-color .2s}
+.qc.ok{border-color:#0c5c38}.qc.no{border-color:#7f1d1d}
+.qc-hd{padding:1.1rem 1.4rem .8rem;display:flex;gap:.9rem;align-items:flex-start}
+.qnum{min-width:34px;height:34px;border-radius:50%;background:var(--apal);border:1px solid #6b4800;color:var(--amber);font-family:'IBM Plex Mono',monospace;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.qtop{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:.22rem}
+.qq{font-size:.95rem;color:var(--text);line-height:1.45}
+.opts{padding:0 1.4rem 1.2rem;display:flex;flex-direction:column;gap:.45rem}
+.opt{padding:.6rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:.875rem;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:.6rem;text-align:left}
+.opt:hover{border-color:var(--amber);color:var(--amber)}
+.opt.cor{background:var(--gpal);border-color:#0c5c38;color:var(--green);cursor:default}
+.opt.wrg{background:#1e0a0a;border-color:#7f1d1d;color:#f87171;cursor:default}
+.opt.sho{background:var(--gpal);border-color:#0c5c38;color:var(--green);cursor:default}
+.opt.dis{cursor:default}
+.oltr{min-width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:.72rem;flex-shrink:0}
+.fbx{font-size:.8rem;padding:0 1.4rem .9rem;color:var(--muted);display:none;line-height:1.55;font-weight:300}
+.fbx.vis{display:block}
+.okt{color:var(--green);font-weight:500}.not{color:#f87171;font-weight:500}
+
+/* EX2 STRUCTURES */
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:1.2rem;overflow:hidden}
+.sc.ok{border-color:#0c5c38}.sc.no{border-color:#7f1d1d}
+.sc-hd{padding:1.1rem 1.4rem .7rem;display:flex;gap:.9rem;align-items:flex-start}
+.snum{min-width:34px;height:34px;border-radius:50%;background:var(--gpal);border:1px solid var(--gdim);color:var(--green);font-family:'IBM Plex Mono',monospace;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.stop{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:.22rem}
+.sq{font-size:.95rem;color:var(--text);line-height:1.45}
+.sg{padding:0 1.4rem 1.2rem;display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.so{border-radius:10px;border:2px solid var(--border);background:var(--surface2);cursor:pointer;transition:all .18s;display:flex;flex-direction:column;align-items:center}
+.so:hover{border-color:var(--green)}
+.so svg{width:100%;height:130px;display:block}
+.sl{font-size:.78rem;color:var(--muted);padding:.35rem;text-align:center;border-top:1px solid var(--border);width:100%;font-family:'IBM Plex Mono',monospace}
+.so.cor{border-color:var(--green);background:var(--gpal);cursor:default}
+.so.cor .sl{color:var(--green);border-color:#0c5c38}
+.so.wrg{border-color:#f87171;background:#1e0a0a;cursor:default}
+.so.wrg .sl{color:#f87171;border-color:#7f1d1d}
+.so.sho{border-color:var(--green);background:var(--gpal);cursor:default}
+.so.sho .sl{color:var(--green);border-color:#0c5c38}
+.so.dis{cursor:default}
+.sfb{font-size:.8rem;padding:0 1.4rem .9rem;color:var(--muted);display:none;line-height:1.55;font-weight:300}
+.sfb.vis{display:block}
+
+/* EX3 */
+.cc{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:1rem;overflow:hidden}
+.cc.ok{border-color:#0c5c38}.cc.no{border-color:#7f1d1d}
+.cc-hd{padding:1.1rem 1.4rem .8rem;display:flex;gap:.9rem;align-items:flex-start}
+.cnum{min-width:34px;height:34px;border-radius:50%;background:var(--tpal);border:1px solid #065f52;color:var(--teal);font-family:'IBM Plex Mono',monospace;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ctop{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--teal);margin-bottom:.22rem}
+.cq{font-size:.95rem;color:var(--text);line-height:1.45}
+.chips{padding:0 1.4rem .5rem}
+.chip{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:.25rem .65rem;font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--teal);margin:.2rem .2rem 0 0}
+.copts{padding:0 1.4rem 1.2rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.copt{padding:.55rem .8rem;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:.845rem;cursor:pointer;transition:all .18s;text-align:center}
+.copt:hover{border-color:var(--teal);color:var(--teal)}
+.copt.cor{background:var(--gpal);border-color:#0c5c38;color:var(--green);cursor:default}
+.copt.wrg{background:#1e0a0a;border-color:#7f1d1d;color:#f87171;cursor:default}
+.copt.sho{background:var(--gpal);border-color:#0c5c38;color:var(--green);cursor:default}
+.copt.dis{cursor:default}
+.cfb{font-size:.8rem;padding:0 1.4rem .9rem;color:var(--muted);display:none;line-height:1.55;font-weight:300}
+.cfb.vis{display:block}
+
+@media(max-width:560px){.sg,.copts{grid-template-columns:1fr 1fr}.so svg{height:95px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">🧈 Biochimie S3 · Pr. Atouk</div>
+  <h1>Les <span>Lipides</span></h1>
+  <p>3 exercices interactifs — 40 questions niveau Licence</p>
+  <div class="stats-bar">
+    <div class="stat"><div class="stn">40</div><div class="stl">Questions</div></div>
+    <div class="stat"><div class="stn" id="gA">0</div><div class="stl">Répondues</div></div>
+    <div class="stat"><div class="stn" id="gP">0%</div><div class="stl">Progression</div></div>
+  </div>
+</header>
+
+<div class="tabs-wrap">
+  <button class="tab a" onclick="showTab('e1',this)">📖 Exercice 1 — QCM Cours (15)</button>
+  <button class="tab gr" onclick="showTab('e2',this)">🧪 Exercice 2 — Identifier les Structures (15)</button>
+  <button class="tab te" onclick="showTab('e3',this)">🔬 Exercice 3 — Classification &amp; Propriétés (10)</button>
+</div>
+
+<main>
+<div id="e1" class="panel active">
+  <div class="sec-hd"><div class="sec-ic ia">📖</div><div class="sec-tx"><h2>QCM — Questions de Cours</h2><p>15 questions directes · une seule bonne réponse</p></div></div>
+  <div class="ctrl"><button class="btn" onclick="reset(1)">🔄 Réinitialiser</button></div>
+  <div class="scorebox">
+    <div><div class="scn" id="s1" style="color:var(--amber)">0/15</div><div class="scl">Score</div></div>
+    <div style="flex:1"><div class="plbl" id="pl1">0 / 15 répondues</div><div class="pbar"><div class="pfill fa1" id="pf1"></div></div></div>
+  </div>
+  <div id="c1"></div>
+</div>
+
+<div id="e2" class="panel">
+  <div class="sec-hd"><div class="sec-ic ig">🧪</div><div class="sec-tx"><h2>Identifier la Structure — Lipides et Acides Gras</h2><p>15 questions · choisissez la bonne structure parmi 4 schémas</p></div></div>
+  <div class="ctrl"><button class="btn grn" onclick="reset(2)">🔄 Réinitialiser</button></div>
+  <div class="scorebox">
+    <div><div class="scn" id="s2" style="color:var(--green)">0/15</div><div class="scl">Score</div></div>
+    <div style="flex:1"><div class="plbl" id="pl2">0 / 15 répondues</div><div class="pbar"><div class="pfill fg1" id="pf2"></div></div></div>
+  </div>
+  <div id="c2"></div>
+</div>
+
+<div id="e3" class="panel">
+  <div class="sec-hd"><div class="sec-ic it">🔬</div><div class="sec-tx"><h2>Classification &amp; Propriétés des Lipides</h2><p>10 questions · identifiez la catégorie ou la propriété</p></div></div>
+  <div class="ctrl"><button class="btn tel" onclick="reset(3)">🔄 Réinitialiser</button></div>
+  <div class="scorebox">
+    <div><div class="scn" id="s3" style="color:var(--teal)">0/10</div><div class="scl">Score</div></div>
+    <div style="flex:1"><div class="plbl" id="pl3">0 / 10 répondues</div><div class="pbar"><div class="pfill ft1" id="pf3"></div></div></div>
+  </div>
+  <div id="c3"></div>
+</div>
+</main>
+
+<script>
+const BG='#181d2e', LN='#9ca3af', GR='#34d399', AM='#f0a500', TE='#2dd4bf', RD='#f87171';
+
+function svg(content){
+  return`<svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg"><rect width="220" height="140" fill="${BG}" rx="8"/>${content}</svg>`;
+}
+
+/* ══════════════════════════════════
+   SVG LIBRARY — structures lipidiques
+══════════════════════════════════ */
+const M = {
+
+/* ── Acide gras saturé (acide palmitique C16) ── */
+ag_sature: svg(`
+  <text x="5" y="14" font-size="9" fill="${AM}" font-family="monospace">Ac. Palmitique C16</text>
+  <text x="5" y="32" font-size="9" fill="${LN}" font-family="monospace">CH₃–(CH₂)₁₄–COOH</text>
+  <line x1="10" y1="50" x2="210" y2="50" stroke="${LN}" stroke-width="1.2"/>
+  <text x="5" y="65" font-size="8" fill="${GR}" font-family="monospace">CH₃</text>
+  <line x1="30" y1="50" x2="42" y2="62" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="42" y1="62" x2="54" y2="50" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="54" y1="50" x2="66" y2="62" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="66" y1="62" x2="78" y2="50" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="78" y1="50" x2="90" y2="62" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="90" y1="62" x2="102" y2="50" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="102" y1="50" x2="114" y2="62" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="114" y1="62" x2="126" y2="50" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="126" y1="50" x2="138" y2="62" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="138" y1="62" x2="150" y2="50" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="150" y1="50" x2="165" y2="50" stroke="${LN}" stroke-width="1.2"/>
+  <text x="165" y="45" font-size="9" fill="${GR}" font-family="monospace">COOH</text>
+  <text x="5" y="100" font-size="8" fill="#6b7a99" font-family="monospace">Chaîne linéaire saturée</text>
+  <text x="5" y="113" font-size="8" fill="#6b7a99" font-family="monospace">Pas de double liaison</text>
+  <text x="5" y="130" font-size="8" fill="${AM}" font-family="monospace">Solide à T° ambiante</text>
+`),
+
+/* ── Acide gras insaturé (acide oléique C18:1) ── */
+ag_insature: svg(`
+  <text x="5" y="14" font-size="9" fill="${TE}" font-family="monospace">Ac. Oléique C18:Δ9</text>
+  <text x="5" y="28" font-size="8" fill="${LN}" font-family="monospace">CH₃(CH₂)₇–CH=CH–(CH₂)₇COOH</text>
+  <line x1="10" y1="48" x2="95" y2="48" stroke="${LN}" stroke-width="1.2"/>
+  <text x="5" y="63" font-size="8" fill="${GR}" font-family="monospace">CH₃</text>
+  <line x1="30" y1="48" x2="42" y2="60" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="42" y1="60" x2="54" y2="48" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="54" y1="48" x2="66" y2="60" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="66" y1="60" x2="78" y2="48" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="78" y1="48" x2="90" y2="60" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="90" y1="60" x2="102" y2="48" stroke="${TE}" stroke-width="2"/>
+  <line x1="90" y1="56" x2="102" y2="44" stroke="${TE}" stroke-width="2"/>
+  <text x="95" y="36" font-size="9" fill="${TE}" font-family="monospace">Δ9</text>
+  <line x1="102" y1="48" x2="114" y2="60" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="114" y1="60" x2="126" y2="48" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="126" y1="48" x2="138" y2="60" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="138" y1="60" x2="150" y2="48" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="150" y1="48" x2="165" y2="48" stroke="${LN}" stroke-width="1.2"/>
+  <text x="165" y="44" font-size="9" fill="${GR}" font-family="monospace">COOH</text>
+  <text x="5" y="100" font-size="8" fill="#6b7a99" font-family="monospace">1 double liaison cis en C9</text>
+  <text x="5" y="115" font-size="8" fill="${TE}" font-family="monospace">Liquide à T° ambiante</text>
+`),
+
+/* ── Triglycéride ── */
+triglyceride: svg(`
+  <text x="5" y="14" font-size="9" fill="${AM}" font-family="monospace">Triglycéride</text>
+  <line x1="55" y1="25" x2="55" y2="110" stroke="${LN}" stroke-width="1.5"/>
+  <text x="30" y="40" font-size="9" fill="${LN}" font-family="monospace">H₂C</text>
+  <line x1="52" y1="37" x2="75" y2="37" stroke="${LN}" stroke-width="1.3"/>
+  <text x="75" y="40" font-size="9" fill="${GR}" font-family="monospace">O–CO–R₁</text>
+  <text x="30" y="65" font-size="9" fill="${LN}" font-family="monospace">HC</text>
+  <line x1="47" y1="62" x2="75" y2="62" stroke="${LN}" stroke-width="1.3"/>
+  <text x="75" y="65" font-size="9" fill="${GR}" font-family="monospace">O–CO–R₂</text>
+  <text x="30" y="90" font-size="9" fill="${LN}" font-family="monospace">H₂C</text>
+  <line x1="52" y1="87" x2="75" y2="87" stroke="${LN}" stroke-width="1.3"/>
+  <text x="75" y="90" font-size="9" fill="${GR}" font-family="monospace">O–CO–R₃</text>
+  <text x="5" y="125" font-size="8" fill="#6b7a99" font-family="monospace">Glycérol + 3 AG esterifiés</text>
+`),
+
+/* ── Monoglycéride ── */
+monoglyceride: svg(`
+  <text x="5" y="14" font-size="9" fill="${GR}" font-family="monospace">Monoglycéride</text>
+  <line x1="55" y1="25" x2="55" y2="110" stroke="${LN}" stroke-width="1.5"/>
+  <text x="30" y="40" font-size="9" fill="${LN}" font-family="monospace">H₂C</text>
+  <line x1="52" y1="37" x2="75" y2="37" stroke="${LN}" stroke-width="1.3"/>
+  <text x="75" y="40" font-size="9" fill="${GR}" font-family="monospace">O–CO–R₁</text>
+  <text x="30" y="65" font-size="9" fill="${LN}" font-family="monospace">HC</text>
+  <line x1="47" y1="62" x2="75" y2="62" stroke="${LN}" stroke-width="1.3"/>
+  <text x="75" y="65" font-size="9" fill="${AM}" font-family="monospace">OH</text>
+  <text x="30" y="90" font-size="9" fill="${LN}" font-family="monospace">H₂C</text>
+  <line x1="52" y1="87" x2="75" y2="87" stroke="${LN}" stroke-width="1.3"/>
+  <text x="75" y="90" font-size="9" fill="${AM}" font-family="monospace">OH</text>
+  <text x="5" y="125" font-size="8" fill="#6b7a99" font-family="monospace">Glycérol + 1 AG esterifié</text>
+`),
+
+/* ── Phosphoglycéride (glycérophospholipide) ── */
+phospholipide: svg(`
+  <text x="5" y="14" font-size="9" fill="${TE}" font-family="monospace">Phosphoglycéride</text>
+  <line x1="55" y1="22" x2="55" y2="112" stroke="${LN}" stroke-width="1.5"/>
+  <text x="28" y="38" font-size="8" fill="${LN}" font-family="monospace">H₂C–O–CO–R₁</text>
+  <text x="5" y="51" font-size="7" fill="${AM}" font-family="monospace">pôle hydrophobe</text>
+  <text x="28" y="66" font-size="8" fill="${LN}" font-family="monospace">HC–O–CO–R₂</text>
+  <text x="28" y="88" font-size="8" fill="${LN}" font-family="monospace">H₂C–O–PO₄–X</text>
+  <text x="5" y="101" font-size="7" fill="${TE}" font-family="monospace">pôle hydrophile</text>
+  <line x1="8" y1="72" x2="20" y2="72" stroke="${AM}" stroke-width="1.5"/>
+  <line x1="8" y1="92" x2="20" y2="92" stroke="${TE}" stroke-width="1.5"/>
+  <text x="5" y="125" font-size="8" fill="#6b7a99" font-family="monospace">2 AG + glycérol + acide phosphorique</text>
+`),
+
+/* ── Sphingomyéline ── */
+sphingomyeline: svg(`
+  <text x="5" y="14" font-size="9" fill="${GR}" font-family="monospace">Sphingomyéline</text>
+  <text x="5" y="30" font-size="8" fill="${LN}" font-family="monospace">Sphingosine + AG (liaison amide)</text>
+  <line x1="30" y1="48" x2="30" y2="110" stroke="${LN}" stroke-width="1.5"/>
+  <text x="5" y="50" font-size="8" fill="${LN}" font-family="monospace">H₂C–OH</text>
+  <text x="5" y="65" font-size="8" fill="${TE}" font-family="monospace">HC–NH–CO–R</text>
+  <text x="5" y="80" font-size="8" fill="${LN}" font-family="monospace">HC=CH–(CH₂)₁₂–CH₃</text>
+  <text x="5" y="96" font-size="8" fill="${LN}" font-family="monospace">H₂C–O–PO₄–Choline</text>
+  <text x="5" y="120" font-size="8" fill="#6b7a99" font-family="monospace">Gaine de myéline — neurones</text>
+  <text x="5" y="132" font-size="8" fill="${GR}" font-family="monospace">Liaison amide ≠ ester</text>
+`),
+
+/* ── Acide gras polyinsaturé (acide linoléique C18:2) ── */
+ag_polyinsature: svg(`
+  <text x="5" y="14" font-size="9" fill="${GR}" font-family="monospace">Ac. Linoléique C18:Δ9,12</text>
+  <text x="5" y="27" font-size="8" fill="${LN}" font-family="monospace">2 doubles liaisons</text>
+  <line x1="10" y1="50" x2="210" y2="50" stroke="${LN}" stroke-width="0.8" stroke-dasharray="2,2"/>
+  <line x1="10" y1="55" x2="55" y2="55" stroke="${LN}" stroke-width="1.5"/>
+  <line x1="55" y1="55" x2="68" y2="42" stroke="${TE}" stroke-width="2"/>
+  <line x1="58" y1="55" x2="71" y2="42" stroke="${TE}" stroke-width="2"/>
+  <text x="60" y="38" font-size="8" fill="${TE}" font-family="monospace">Δ9</text>
+  <line x1="68" y1="42" x2="105" y2="42" stroke="${LN}" stroke-width="1.5"/>
+  <line x1="105" y1="42" x2="118" y2="55" stroke="${TE}" stroke-width="2"/>
+  <line x1="108" y1="42" x2="121" y2="55" stroke="${TE}" stroke-width="2"/>
+  <text x="110" y="38" font-size="8" fill="${TE}" font-family="monospace">Δ12</text>
+  <line x1="118" y1="55" x2="155" y2="55" stroke="${LN}" stroke-width="1.5"/>
+  <text x="157" y="59" font-size="9" fill="${GR}" font-family="monospace">COOH</text>
+  <text x="5" y="80" font-size="8" fill="${GR}" font-family="monospace">CH₃</text>
+  <text x="5" y="110" font-size="8" fill="#6b7a99" font-family="monospace">Ac. gras essentiel (oméga-6)</text>
+  <text x="5" y="125" font-size="8" fill="${TE}" font-family="monospace">Point de fusion très bas</text>
+`),
+
+/* ── Cire (ester d'AG à longue chaîne) ── */
+cire: svg(`
+  <text x="5" y="14" font-size="9" fill="${AM}" font-family="monospace">Cire — Palmitate de cétyle</text>
+  <text x="5" y="30" font-size="8" fill="${LN}" font-family="monospace">C₃₀H₆₁–O–CO–C₁₅H₃₁</text>
+  <text x="5" y="50" font-size="9" fill="${LN}" font-family="monospace">Alcool aliphatique</text>
+  <line x1="5" y1="55" x2="100" y2="55" stroke="${AM}" stroke-width="2"/>
+  <text x="88" y="50" font-size="9" fill="${GR}" font-family="monospace">O</text>
+  <line x1="95" y1="55" x2="105" y2="45" stroke="${GR}" stroke-width="2"/>
+  <line x1="105" y1="45" x2="115" y2="55" stroke="${GR}" stroke-width="2"/>
+  <text x="112" y="50" font-size="9" fill="${GR}" font-family="monospace">C=O</text>
+  <line x1="135" y1="55" x2="210" y2="55" stroke="${TE}" stroke-width="2"/>
+  <text x="140" y="68" font-size="9" fill="${TE}" font-family="monospace">Acide gras</text>
+  <text x="5" y="100" font-size="8" fill="#6b7a99" font-family="monospace">Esters à très longue chaîne</text>
+  <text x="5" y="115" font-size="8" fill="#6b7a99" font-family="monospace">92% du blanc de baleine</text>
+  <text x="5" y="130" font-size="8" fill="${AM}" font-family="monospace">Cires végétales & insectes</text>
+`),
+
+/* ── Céramide ── */
+ceramide: svg(`
+  <text x="5" y="14" font-size="9" fill="${TE}" font-family="monospace">Céramide</text>
+  <text x="5" y="28" font-size="8" fill="${LN}" font-family="monospace">Sphingosine + AG (amide)</text>
+  <line x1="60" y1="40" x2="60" y2="115" stroke="${LN}" stroke-width="1.5"/>
+  <text x="5" y="53" font-size="8" fill="${LN}" font-family="monospace">H₂C–OH</text>
+  <text x="5" y="68" font-size="8" fill="${TE}" font-family="monospace">HC–NH–CO–R</text>
+  <text x="38" y="68" font-size="8" fill="${GR}" font-family="monospace">← liaison amide</text>
+  <text x="5" y="83" font-size="8" fill="${LN}" font-family="monospace">HC–OH</text>
+  <text x="5" y="98" font-size="8" fill="${LN}" font-family="monospace">HC=CH–(CH₂)₁₂–CH₃</text>
+  <text x="5" y="120" font-size="8" fill="#6b7a99" font-family="monospace">Précurseur des sphingolipides</text>
+  <text x="5" y="133" font-size="8" fill="${TE}" font-family="monospace">Pas de phosphate, pas d'ose</text>
+`),
+
+/* ── Galactocérébroside ── */
+galactocerebroside: svg(`
+  <text x="5" y="14" font-size="9" fill="${GR}" font-family="monospace">Galactocérébroside</text>
+  <text x="5" y="27" font-size="8" fill="${LN}" font-family="monospace">Céramide + D-Galactose</text>
+  <polygon points="35,55 60,40 85,55 80,85 40,85" fill="none" stroke="${AM}" stroke-width="2"/>
+  <text x="33" y="53" font-size="9" fill="${AM}" font-family="monospace">O</text>
+  <text x="48" y="33" font-size="8" fill="${LN}" font-family="monospace">Gal</text>
+  <line x1="82" y1="68" x2="100" y2="68" stroke="${TE}" stroke-width="2"/>
+  <text x="95" y="63" font-size="8" fill="${TE}" font-family="monospace">β(1→1)</text>
+  <text x="110" y="60" font-size="8" fill="${GR}" font-family="monospace">Céramide</text>
+  <text x="110" y="75" font-size="8" fill="${LN}" font-family="monospace">(sphingosine</text>
+  <text x="110" y="88" font-size="8" fill="${LN}" font-family="monospace">+ AG)</text>
+  <text x="5" y="110" font-size="8" fill="#6b7a99" font-family="monospace">Lipide non phosphoré</text>
+  <text x="5" y="125" font-size="8" fill="${GR}" font-family="monospace">1 ose = D-galactose</text>
+  <text x="5" y="138" font-size="8" fill="${AM}" font-family="monospace">Tissu nerveux</text>
+`),
+
+/* ── Diglycéride ── */
+diglyceride: svg(`
+  <text x="5" y="14" font-size="9" fill="${GR}" font-family="monospace">Diglycéride</text>
+  <line x1="55" y1="25" x2="55" y2="110" stroke="${LN}" stroke-width="1.5"/>
+  <text x="28" y="40" font-size="9" fill="${LN}" font-family="monospace">H₂C</text>
+  <line x1="52" y1="37" x2="72" y2="37" stroke="${LN}" stroke-width="1.3"/>
+  <text x="72" y="40" font-size="9" fill="${GR}" font-family="monospace">O–CO–R₁</text>
+  <text x="28" y="65" font-size="9" fill="${LN}" font-family="monospace">HC</text>
+  <line x1="47" y1="62" x2="72" y2="62" stroke="${LN}" stroke-width="1.3"/>
+  <text x="72" y="65" font-size="9" fill="${GR}" font-family="monospace">O–CO–R₂</text>
+  <text x="28" y="90" font-size="9" fill="${LN}" font-family="monospace">H₂C</text>
+  <line x1="52" y1="87" x2="72" y2="87" stroke="${LN}" stroke-width="1.3"/>
+  <text x="72" y="90" font-size="9" fill="${AM}" font-family="monospace">OH</text>
+  <text x="5" y="125" font-size="8" fill="#6b7a99" font-family="monospace">Glycérol + 2 AG esterifiés</text>
+`),
+
+/* ── Acide arachidonique C20:4 ── */
+acide_arachidonique: svg(`
+  <text x="5" y="14" font-size="9" fill="${RD}" font-family="monospace">Ac. Arachidonique C20:Δ5,8,11,14</text>
+  <text x="5" y="27" font-size="8" fill="${LN}" font-family="monospace">4 doubles liaisons</text>
+  <line x1="5" y1="50" x2="30" y2="50" stroke="${LN}" stroke-width="1.5"/>
+  <line x1="30" y1="50" x2="45" y2="38" stroke="${RD}" stroke-width="2"/>
+  <line x1="33" y1="50" x2="48" y2="38" stroke="${RD}" stroke-width="2"/>
+  <text x="36" y="34" font-size="7" fill="${RD}" font-family="monospace">Δ5</text>
+  <line x1="45" y1="38" x2="70" y2="38" stroke="${LN}" stroke-width="1.5"/>
+  <line x1="70" y1="38" x2="85" y2="50" stroke="${RD}" stroke-width="2"/>
+  <line x1="73" y1="38" x2="88" y2="50" stroke="${RD}" stroke-width="2"/>
+  <text x="75" y="34" font-size="7" fill="${RD}" font-family="monospace">Δ8</text>
+  <line x1="85" y1="50" x2="110" y2="50" stroke="${LN}" stroke-width="1.5"/>
+  <line x1="110" y1="50" x2="125" y2="38" stroke="${RD}" stroke-width="2"/>
+  <line x1="113" y1="50" x2="128" y2="38" stroke="${RD}" stroke-width="2"/>
+  <text x="115" y="34" font-size="7" fill="${RD}" font-family="monospace">Δ11</text>
+  <line x1="125" y1="38" x2="150" y2="38" stroke="${LN}" stroke-width="1.5"/>
+  <line x1="150" y1="38" x2="165" y2="50" stroke="${RD}" stroke-width="2"/>
+  <line x1="153" y1="38" x2="168" y2="50" stroke="${RD}" stroke-width="2"/>
+  <text x="152" y="34" font-size="7" fill="${RD}" font-family="monospace">Δ14</text>
+  <line x1="165" y1="50" x2="210" y2="50" stroke="${LN}" stroke-width="1.5"/>
+  <text x="5" y="75" font-size="8" fill="${GR}" font-family="monospace">CH₃ ──────────────── COOH</text>
+  <text x="5" y="100" font-size="8" fill="#6b7a99" font-family="monospace">Oméga-6, précurseur prostaglandines</text>
+  <text x="5" y="115" font-size="8" fill="${RD}" font-family="monospace">C20 — AG polyinsaturé</text>
+`),
+
+/* ── Lecithine (phosphatidylcholine) ── */
+lecithine: svg(`
+  <text x="5" y="14" font-size="9" fill="${GR}" font-family="monospace">Lécithine (Phosphatidylcholine)</text>
+  <text x="5" y="27" font-size="8" fill="${LN}" font-family="monospace">X = Choline</text>
+  <line x1="55" y1="35" x2="55" y2="100" stroke="${LN}" stroke-width="1.5"/>
+  <text x="28" y="50" font-size="8" fill="${LN}" font-family="monospace">H₂C–O–CO–R₁</text>
+  <text x="28" y="67" font-size="8" fill="${LN}" font-family="monospace">HC–O–CO–R₂</text>
+  <text x="28" y="84" font-size="8" fill="${TE}" font-family="monospace">H₂C–O–PO₄–Choline</text>
+  <text x="130" y="100" font-size="8" fill="${GR}" font-family="monospace">–N⁺(CH₃)₃</text>
+  <text x="5" y="115" font-size="8" fill="#6b7a99" font-family="monospace">Membrane cellules animales</text>
+  <text x="5" y="128" font-size="8" fill="${TE}" font-family="monospace">Amphiphile — bicouche lipidique</text>
+`),
+
+/* ── Acide butyrique C4 ── */
+acide_butyrique: svg(`
+  <text x="5" y="14" font-size="9" fill="${AM}" font-family="monospace">Acide Butyrique C4</text>
+  <text x="5" y="35" font-size="12" fill="${LN}" font-family="monospace">CH₃–CH₂–CH₂–COOH</text>
+  <text x="5" y="60" font-size="9" fill="${AM}" font-family="monospace">C1</text>
+  <line x1="20" y1="70" x2="55" y2="70" stroke="${LN}" stroke-width="2"/>
+  <text x="56" y="65" font-size="9" fill="${LN}" font-family="monospace">C2</text>
+  <line x1="70" y1="70" x2="105" y2="70" stroke="${LN}" stroke-width="2"/>
+  <text x="106" y="65" font-size="9" fill="${LN}" font-family="monospace">C3</text>
+  <line x1="120" y1="70" x2="155" y2="70" stroke="${LN}" stroke-width="2"/>
+  <text x="156" y="65" font-size="9" fill="${GR}" font-family="monospace">COOH</text>
+  <text x="15" y="90" font-size="9" fill="${AM}" font-family="monospace">CH₃</text>
+  <text x="5" y="115" font-size="8" fill="#6b7a99" font-family="monospace">Plus petit AG des lipides</text>
+  <text x="5" y="128" font-size="8" fill="#6b7a99" font-family="monospace">Présent dans le beurre</text>
+`),
+
+/* ── Acide stéarique C18 ── */
+acide_stearique: svg(`
+  <text x="5" y="14" font-size="9" fill="${TE}" font-family="monospace">Acide Stéarique C18</text>
+  <text x="5" y="30" font-size="9" fill="${LN}" font-family="monospace">CH₃–(CH₂)₁₆–COOH</text>
+  <line x1="10" y1="52" x2="210" y2="52" stroke="${LN}" stroke-width="1"/>
+  <text x="5" y="65" font-size="8" fill="${GR}" font-family="monospace">CH₃</text>
+  <line x1="28" y1="52" x2="40" y2="64" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="40" y1="64" x2="52" y2="52" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="52" y1="52" x2="64" y2="64" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="64" y1="64" x2="76" y2="52" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="76" y1="52" x2="88" y2="64" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="88" y1="64" x2="100" y2="52" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="100" y1="52" x2="112" y2="64" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="112" y1="64" x2="124" y2="52" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="124" y1="52" x2="136" y2="64" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="136" y1="64" x2="148" y2="52" stroke="${LN}" stroke-width="1.2"/>
+  <line x1="148" y1="52" x2="160" y2="52" stroke="${LN}" stroke-width="1.2"/>
+  <text x="160" y="48" font-size="9" fill="${GR}" font-family="monospace">COOH</text>
+  <text x="5" y="95" font-size="8" fill="#6b7a99" font-family="monospace">AG saturé C18 — solide</text>
+  <text x="5" y="110" font-size="8" fill="${TE}" font-family="monospace">Point de fusion élevé</text>
+`),
+
+};
+
+/* ══════════════════════════════════
+   EXERCICE 1 — QCM COURS (15 questions)
+══════════════════════════════════ */
+const D1 = [
+  {num:1,top:"Définition des Lipides",
+   q:"Quelle propriété physique est caractéristique de TOUS les lipides ?",
+   opts:["Ils sont solubles dans l'eau","Ils sont insolubles dans l'eau mais solubles dans les solvants organiques","Ils contiennent tous de l'azote","Ils sont tous des esters de glycérol"],c:1,
+   fb:"Les lipides sont des composés <strong>apolaires</strong>, insolubles dans l'eau mais solubles dans les solvants organiques (éther, chloroforme, benzène, acétone). C'est la propriété physique qui les définit tous."},
+
+  {num:2,top:"Classification des Lipides",
+   q:"Parmi ces lipides, lequel appartient aux lipides SIMPLES (homolipides) ?",
+   opts:["Les glycérophospholipides","Les sphingolipides","Les glycérides","Les plasmalogènes"],c:2,
+   fb:"Les <strong>glycérides</strong> (monoglycérides, diglycérides, triglycérides) sont des lipides simples ou homolipides, car leur hydrolyse ne libère que des acides gras et du glycérol. Les glycérophospholipides et sphingolipides sont des lipides composés ou hétérolipides."},
+
+  {num:3,top:"Acides Gras Saturés",
+   q:"Quelle est la formule générale d'un acide gras saturé ?",
+   opts:["CnH2nO2","CH₃–(CH₂)n–COOH","CH₃–(CH₂)n–CH=CH–COOH","CnH2n-2O2"],c:1,
+   fb:"Un acide gras saturé répond à la formule <strong>CH₃–(CH₂)n–COOH</strong>. La chaîne est linéaire, sans double liaison, avec un nombre pair d'atomes de carbone. L'acide gras le plus petit des lipides est l'acide butyrique (C4)."},
+
+  {num:4,top:"Acides Gras — Nomenclature",
+   q:"L'acide oléique est un acide gras en C18 avec une double liaison en position 9. Sa notation correcte est :",
+   opts:["C18:0","C18:1 Δ9","C18:2 Δ9,12","C20:4 Δ5,8,11,14"],c:1,
+   fb:"L'<strong>acide oléique</strong> est noté <strong>C18:1 Δ9</strong> : 18 carbones, 1 double liaison, en position 9. C'est un acide gras monoinsaturé. Le C18:2 Δ9,12 est l'acide linoléique et le C20:4 est l'acide arachidonique."},
+
+  {num:5,top:"Point de Fusion des AG",
+   q:"Pourquoi l'huile est-elle liquide à température ambiante contrairement au beurre ?",
+   opts:["L'huile contient plus de protéines","L'huile est riche en acides gras insaturés qui ont un point de fusion bas","Le beurre contient du cholestérol","L'huile est plus légère que le beurre"],c:1,
+   fb:"L'huile est riche en <strong>acides gras insaturés</strong> (oléique, linoléique). Plus un acide gras est insaturé, plus son point de fusion est bas. Les doubles liaisons créent des coudes dans la chaîne qui empêchent le tassement des molécules, abaissant le point de fusion. Le beurre, riche en AG saturés, est solide."},
+
+  {num:6,top:"Indice de Saponification",
+   q:"Qu'est-ce que l'indice de saponification (Is) ?",
+   opts:["La quantité en g d'iode fixée par 100 g de lipide","La quantité en mg de potasse (KOH) nécessaire pour saponifier 1 g de matière grasse","Le rapport entre AG saturés et insaturés","La masse moléculaire de l'acide gras"],c:1,
+   fb:"L'<strong>indice de saponification (Is)</strong> est défini comme la quantité en <strong>mg de potasse (KOH)</strong> qui saponifie <strong>1 g de matière grasse</strong>. Il permet de déterminer la masse moléculaire moyenne des acides gras d'un corps gras. Plus les AG sont courts, plus l'Is est élevé."},
+
+  {num:7,top:"Indice d'Iode",
+   q:"L'indice d'iode (Ii) permet de mesurer :",
+   opts:["La masse moléculaire des glycérides","L'indice d'acidité de la matière grasse","Le degré d'insaturation des acides gras","La quantité de phospholipides"],c:2,
+   fb:"L'<strong>indice d'iode (Ii)</strong> est la quantité en grammes d'iode fixée par 100 g de matière grasse. Les halogènes (I₂, Br₂) s'additionnent aux doubles liaisons : plus la valeur est élevée, plus le lipide est <strong>insaturé</strong>. C'est donc un indicateur du <strong>degré d'insaturation</strong>."},
+
+  {num:8,top:"Triglycérides",
+   q:"Dans un triglycéride, le carbone Cβ du glycérol est dit 'asymétrique'. Cela signifie :",
+   opts:["Il porte 3 AG identiques","Il peut donner naissance à 2 isomères optiques (I et II)","Il est toujours libre (non estérifié)","Il ne peut être estérifié qu'avec un AG saturé"],c:1,
+   fb:"Le <strong>Cβ</strong> du glycérol dans un triglycéride est substitué <strong>asymétriquement</strong>, ce qui engendre deux isomères possibles (isomère I et isomère II). Chez les organismes vivants, les triglycérides sont de <strong>type isomère II</strong>."},
+
+  {num:9,top:"Glycérophospholipides",
+   q:"Dans un glycérophospholipide, comment sont répartis les acides gras dans les organismes vivants ?",
+   opts:["2 AG insaturés en Cα et Cβ","AG saturé en Cα et AG insaturé en Cβ","AG insaturé en Cα et AG saturé en Cβ","3 AG identiques sur tous les carbones"],c:1,
+   fb:"Dans les glycérophospholipides naturels : en <strong>Cα</strong> se trouve un <strong>AG saturé (R1)</strong>, en <strong>Cβ</strong> se trouve un <strong>AG insaturé (R2)</strong>, et en Cα' se trouve l'acide phosphorique lié à un groupement X. Cette disposition est caractéristique des membranes biologiques."},
+
+  {num:10,top:"Phospholipases",
+   q:"Quelle phospholipase coupe la liaison au niveau du Cβ du glycérophospholipide ?",
+   opts:["Phospholipase A1","Phospholipase A2","Phospholipase C","Phospholipase D"],c:1,
+   fb:"La <strong>phospholipase A2</strong> coupe spécifiquement la liaison ester au niveau du <strong>Cβ</strong>, libérant l'acide gras insaturé en position 2. La phospholipase A1 (ou B) coupe en Cα, la phospholipase C coupe entre le glycérol et le phosphate, et la phospholipase D coupe entre le phosphate et le groupement X."},
+
+  {num:11,top:"Sphingolipides",
+   q:"Quelle est la différence fondamentale entre les sphingolipides et les glycérophospholipides ?",
+   opts:["Les sphingolipides contiennent du glycérol à la place de la sphingosine","Les sphingolipides contiennent de la sphingosine à la place du glycérol comme alcool de base","Les sphingolipides n'ont pas d'acides gras","Les sphingolipides sont uniquement présents dans les bactéries"],c:1,
+   fb:"La différence fondamentale : les <strong>sphingolipides</strong> contiennent de la <strong>sphingosine</strong> (alcool aminé à longue chaîne) à la place du glycérol. La sphingosine est liée à un AG par une <strong>liaison amide</strong> (sur la fonction amine) et non par une liaison ester."},
+
+  {num:12,top:"Sphingomyélines",
+   q:"Les sphingomyélines sont particulièrement abondantes dans :",
+   opts:["Le tissu adipeux","Le foie","Les neurones (gaine de myéline)","Les globules rouges"],c:2,
+   fb:"Les <strong>sphingomyélines</strong> sont abondantes dans les <strong>neurones</strong> où elles constituent la <strong>gaine de myéline</strong>. La gaine de myéline isole les axones et permet une transmission rapide de l'influx nerveux."},
+
+  {num:13,top:"Cérébrosides",
+   q:"Un galactocérébroside est composé de :",
+   opts:["Céramide + phosphate + choline","Céramide + D-galactose (liaison β-glycosidique)","Sphingosine + acide phosphatidique","Glycérol + D-galactose + 2 AG"],c:1,
+   fb:"Un <strong>galactocérébroside</strong> est formé d'un <strong>céramide</strong> lié à une molécule de <strong>D-galactose</strong> par une liaison β-glycosidique (β D-galactosyl(1;1) céramide). C'est un lipide non phosphoré (sans acide phosphorique). Il est présent dans le tissu nerveux."},
+
+  {num:14,top:"Terpènes",
+   q:"Les terpènes sont des lipides insaponifiables formés par polymérisation d'unités :",
+   opts:["D'isoprène (2-méthyl-1,3-butadiène)","De glucose","D'acide gras saturé","De glycérol"],c:0,
+   fb:"Les <strong>terpènes</strong> sont des lipides insaponifiables formés par polymérisation d'unités d'<strong>isoprène</strong> (2-méthyl-1,3-butadiène, C5H8). Selon le nombre d'unités : monoterpènes (2 unités, 10C), diterpènes (4 unités, 20C), etc. Exemples : géraniol (géranium), menthol (menthe), carotènes."},
+
+  {num:15,top:"Réaction de Saponification",
+   q:"La réaction de saponification d'un glycéride en milieu basique (NaOH) produit :",
+   opts:["Uniquement des acides gras libres","Du glycérol et des sels d'acides gras (savons)","Du glycérol et des esters méthyliques","De l'acide sulfurique et du glycérol"],c:1,
+   fb:"En milieu basique (<strong>NaOH ou KOH</strong>), un glycéride subit une saponification pour donner du <strong>glycérol</strong> et des <strong>sels d'acides gras</strong> (appelés savons). C'est le principe de la fabrication du savon. En milieu acide (H₂SO₄), on obtient du glycérol et des acides gras libres."},
+];
+
+/* ══════════════════════════════════
+   EXERCICE 2 — STRUCTURES (15 questions)
+══════════════════════════════════ */
+const D2 = [
+  {num:1,top:"Acide Gras Saturé",
+   q:"Identifiez la structure d'un acide gras SATURÉ :",
+   opts:[
+     {svg:M.ag_sature, lb:"Acide palmitique C16:0"},
+     {svg:M.ag_insature, lb:"Acide oléique C18:1"},
+     {svg:M.ag_polyinsature, lb:"Acide linoléique C18:2"},
+     {svg:M.acide_arachidonique, lb:"Acide arachidonique C20:4"},
+   ],c:0,
+   fb:"L'acide palmitique (C16:0) est un acide gras <strong>saturé</strong> : chaîne linéaire sans double liaison, formule CH₃–(CH₂)₁₄–COOH. Il est solide à température ambiante. Les autres structures montrent des doubles liaisons (représentées par des doubles traits colorés)."},
+
+  {num:2,top:"Acide Gras Monoinsaturé",
+   q:"Quelle structure correspond à l'acide oléique (C18:1 Δ9) ?",
+   opts:[
+     {svg:M.ag_sature, lb:"Acide palmitique C16:0"},
+     {svg:M.ag_insature, lb:"Acide oléique C18:1 Δ9"},
+     {svg:M.acide_butyrique, lb:"Acide butyrique C4"},
+     {svg:M.acide_stearique, lb:"Acide stéarique C18:0"},
+   ],c:1,
+   fb:"L'<strong>acide oléique</strong> (C18:1 Δ9) possède une seule double liaison en position 9 (représentée en bleu). Il est liquide à température ambiante, présent en grande quantité dans l'huile d'olive. Formule : CH₃–(CH₂)₇–CH=CH–(CH₂)₇–COOH."},
+
+  {num:3,top:"Triglycéride",
+   q:"Identifiez la structure d'un triglycéride (triacylglycérol) :",
+   opts:[
+     {svg:M.monoglyceride, lb:"Monoglycéride"},
+     {svg:M.diglyceride, lb:"Diglycéride"},
+     {svg:M.triglyceride, lb:"Triglycéride"},
+     {svg:M.phospholipide, lb:"Phosphoglycéride"},
+   ],c:2,
+   fb:"Un <strong>triglycéride</strong> (αβα' triacylglycérol) possède les <strong>3 fonctions alcool</strong> du glycérol estérifiées par 3 acides gras (R1, R2, R3). Si R1=R2=R3 : triglycéride homogène ; si différents : triglycéride hétérogène. Ce sont les lipides de réserve énergétique."},
+
+  {num:4,top:"Monoglycéride",
+   q:"Quel schéma représente un monoglycéride ?",
+   opts:[
+     {svg:M.triglyceride, lb:"Triglycéride"},
+     {svg:M.diglyceride, lb:"Diglycéride"},
+     {svg:M.phospholipide, lb:"Phosphoglycéride"},
+     {svg:M.monoglyceride, lb:"Monoglycéride"},
+   ],c:3,
+   fb:"Un <strong>monoglycéride</strong> (α-monoacylglycérol) résulte de l'estérification d'<strong>une seule</strong> des 3 fonctions alcool du glycérol par un acide gras. Les 2 autres fonctions –OH restent libres. Il existe aussi des β-monoglycérides."},
+
+  {num:5,top:"Phosphoglycéride",
+   q:"Quelle structure correspond à un glycérophospholipide ?",
+   opts:[
+     {svg:M.triglyceride, lb:"Triglycéride"},
+     {svg:M.phospholipide, lb:"Glycérophospholipide"},
+     {svg:M.ceramide, lb:"Céramide"},
+     {svg:M.cire, lb:"Cire"},
+   ],c:1,
+   fb:"Un <strong>glycérophospholipide</strong> est formé d'un glycérol estérifié par 2 AG (en Cα et Cβ) et par l'acide phosphorique (en Cα') lié à un groupement X. Il possède un <strong>pôle hydrophobe</strong> (chaînes AG) et un <strong>pôle hydrophile</strong> (tête phosphate+X), ce qui lui confère son caractère amphiphile."},
+
+  {num:6,top:"Sphingomyéline",
+   q:"Identifiez la structure de la sphingomyéline :",
+   opts:[
+     {svg:M.lecithine, lb:"Lécithine (phosphatidylcholine)"},
+     {svg:M.sphingomyeline, lb:"Sphingomyéline"},
+     {svg:M.ceramide, lb:"Céramide"},
+     {svg:M.galactocerebroside, lb:"Galactocérébroside"},
+   ],c:1,
+   fb:"La <strong>sphingomyéline</strong> est formée d'une sphingosine liée à un AG par une <strong>liaison amide</strong> (–NH–CO–R), avec un groupement phosphocholine en tête. Elle est abondante dans les <strong>neurones</strong> (gaine de myéline). La liaison amide la distingue des glycérophospholipides (liaison ester)."},
+
+  {num:7,top:"Cire",
+   q:"Quelle structure représente une cire comme le palmitate de cétyle ?",
+   opts:[
+     {svg:M.phospholipide, lb:"Phosphoglycéride"},
+     {svg:M.monoglyceride, lb:"Monoglycéride"},
+     {svg:M.cire, lb:"Palmitate de cétyle (cire)"},
+     {svg:M.triglyceride, lb:"Triglycéride"},
+   ],c:2,
+   fb:"Une <strong>cire</strong> est un ester d'un acide gras et d'un alcool aliphatique à <strong>longue chaîne carbonée</strong>. Le palmitate de cétyle (C₃₀H₆₁–O–CO–C₁₅H₃₁) constitue 92% du blanc de baleine. Les cires sont des lipides de revêtement (cires végétales, cires d'abeilles, cires d'insectes)."},
+
+  {num:8,top:"Céramide",
+   q:"Un céramide est formé par :",
+   opts:[
+     {svg:M.galactocerebroside, lb:"Céramide + D-galactose"},
+     {svg:M.sphingomyeline, lb:"Céramide + phosphocholine"},
+     {svg:M.ceramide, lb:"Sphingosine + AG (liaison amide)"},
+     {svg:M.lecithine, lb:"Glycérol + 2 AG + phosphocholine"},
+   ],c:2,
+   fb:"Un <strong>céramide</strong> résulte de la fixation d'un <strong>acide gras</strong> sur la <strong>fonction amine</strong> de la sphingosine par une <strong>liaison amide</strong>. C'est le précurseur commun des sphingolipides : sphingomyélines (+ phosphocholine), cérébrosides (+ ose), gangliosides (+ oligosaccharides)."},
+
+  {num:9,top:"Galactocérébroside",
+   q:"Identifiez le galactocérébroside :",
+   opts:[
+     {svg:M.ceramide, lb:"Céramide seul"},
+     {svg:M.galactocerebroside, lb:"Galactocérébroside (céramide + Gal)"},
+     {svg:M.sphingomyeline, lb:"Sphingomyéline"},
+     {svg:M.lecithine, lb:"Lécithine"},
+   ],c:1,
+   fb:"Le <strong>galactocérébroside</strong> est formé d'un céramide lié à une molécule de <strong>D-galactose</strong> par une liaison β-glycosidique en position 1 de la sphingosine (β D-galactosyl(1;1) céramide). C'est un lipide <strong>non phosphoré</strong>, présent dans le tissu nerveux."},
+
+  {num:10,top:"Acide Arachidonique",
+   q:"L'acide arachidonique (C20:4 Δ5,8,11,14) possède :",
+   opts:[
+     {svg:M.ag_insature, lb:"1 double liaison (C18:1)"},
+     {svg:M.ag_polyinsature, lb:"2 doubles liaisons (C18:2)"},
+     {svg:M.acide_arachidonique, lb:"4 doubles liaisons (C20:4)"},
+     {svg:M.ag_sature, lb:"Aucune double liaison (C16:0)"},
+   ],c:2,
+   fb:"L'<strong>acide arachidonique</strong> (C20:4 Δ5,8,11,14) est un <strong>acide gras polyinsaturé</strong> avec <strong>4 doubles liaisons</strong> en positions 5, 8, 11 et 14. C'est un acide gras essentiel oméga-6, précurseur des prostaglandines et des leucotriènes."},
+
+  {num:11,top:"Lécithine",
+   q:"Quelle structure représente la phosphatidylcholine (lécithine) ?",
+   opts:[
+     {svg:M.triglyceride, lb:"Triglycéride"},
+     {svg:M.ceramide, lb:"Céramide"},
+     {svg:M.lecithine, lb:"Lécithine (phosphatidylcholine)"},
+     {svg:M.galactocerebroside, lb:"Galactocérébroside"},
+   ],c:2,
+   fb:"La <strong>lécithine</strong> (phosphatidylcholine) est un glycérophospholipide avec X = <strong>choline</strong> [HOCH₂CH₂–N⁺(CH₃)₃]. Elle est très répandue dans les <strong>membranes des cellules animales</strong> et peu présente chez les bactéries. Son caractère amphiphile lui permet de s'organiser en bicouche lipidique."},
+
+  {num:12,top:"Acide Butyrique",
+   q:"Quel acide gras possède seulement 4 atomes de carbone ?",
+   opts:[
+     {svg:M.acide_stearique, lb:"Acide stéarique C18"},
+     {svg:M.ag_sature, lb:"Acide palmitique C16"},
+     {svg:M.ag_insature, lb:"Acide oléique C18:1"},
+     {svg:M.acide_butyrique, lb:"Acide butyrique C4"},
+   ],c:3,
+   fb:"L'<strong>acide butyrique</strong> (CH₃–CH₂–CH₂–COOH) est le plus petit acide gras constitutif des lipides avec <strong>4 atomes de carbone</strong>. Il est présent dans le beurre et donne à ce dernier son odeur caractéristique. Les AG des lipides commencent par l'acide butyrique."},
+
+  {num:13,top:"Acide Stéarique",
+   q:"Identifiez l'acide stéarique (C18:0) :",
+   opts:[
+     {svg:M.acide_butyrique, lb:"Acide butyrique C4:0"},
+     {svg:M.acide_stearique, lb:"Acide stéarique C18:0"},
+     {svg:M.ag_insature, lb:"Acide oléique C18:1"},
+     {svg:M.ag_polyinsature, lb:"Acide linoléique C18:2"},
+   ],c:1,
+   fb:"L'<strong>acide stéarique</strong> (CH₃–(CH₂)₁₆–COOH) est un acide gras saturé à <strong>18 carbones</strong> (C18:0). Avec son point de fusion élevé, il est solide à température ambiante. Ne pas confondre avec l'acide oléique C18:1 (qui a une double liaison) ou l'acide linoléique C18:2."},
+
+  {num:14,top:"Diglycéride",
+   q:"Quelle structure montre un diglycéride (diacylglycérol) ?",
+   opts:[
+     {svg:M.monoglyceride, lb:"Monoglycéride"},
+     {svg:M.triglyceride, lb:"Triglycéride"},
+     {svg:M.diglyceride, lb:"Diglycéride"},
+     {svg:M.phospholipide, lb:"Glycérophospholipide"},
+   ],c:2,
+   fb:"Un <strong>diglycéride</strong> (αβ ou αα' diacylglycérol) résulte de l'estérification de <strong>deux</strong> fonctions alcool du glycérol par 2 acides gras. La troisième fonction –OH reste libre. Si R1=R2 : diglycéride homogène ; si R1≠R2 : diglycéride hétérogène."},
+
+  {num:15,top:"Acide Linoléique",
+   q:"Identifiez l'acide linoléique (C18:2 Δ9,12), un acide gras essentiel oméga-6 :",
+   opts:[
+     {svg:M.ag_insature, lb:"Acide oléique C18:1 Δ9"},
+     {svg:M.ag_polyinsature, lb:"Acide linoléique C18:2 Δ9,12"},
+     {svg:M.acide_arachidonique, lb:"Acide arachidonique C20:4"},
+     {svg:M.ag_sature, lb:"Acide palmitique C16:0"},
+   ],c:1,
+   fb:"L'<strong>acide linoléique</strong> (C18:2 Δ9,12) est un acide gras polyinsaturé avec <strong>2 doubles liaisons</strong> en positions 9 et 12. C'est un acide gras <strong>essentiel</strong> (non synthétisé par l'organisme, doit être apporté par l'alimentation). Il appartient à la famille oméga-6."},
+];
+
+/* ══════════════════════════════════
+   EXERCICE 3 — CLASSIFICATION & PROPRIÉTÉS (10 questions)
+══════════════════════════════════ */
+const D3 = [
+  {num:1,top:"Lipides Simples vs Composés",
+   q:"Les cires sont classées parmi les lipides :",
+   chips:["Cires végétales","Cires d'insectes","Palmitate de cétyle"],
+   opts:["Lipides composés (hétérolipides)","Lipides de réserve (glycérides)","Lipides simples (homolipides)","Lipides membranaires (phospholipides)"],c:2,
+   fb:"Les <strong>cires</strong> sont des <strong>lipides simples</strong> (homolipides) : leur hydrolyse ne libère que des acides gras et des alcools aliphatiques à longue chaîne. Elles constituent les <strong>lipides de revêtement</strong> (cires végétales, cutine, cire d'abeille, blanc de baleine)."},
+
+  {num:2,top:"Rôle Biologique",
+   q:"Quel type de lipide constitue PRINCIPALEMENT les membranes cellulaires ?",
+   chips:["Membrane plasmique","Bicouche lipidique"],
+   opts:["Les glycérides (triglycérides)","Les cires","Les phospholipides, galactolipides et sulfolipides","Les terpènes"],c:2,
+   fb:"Les <strong>membranes cellulaires</strong> sont principalement constituées de <strong>phospholipides</strong> (glycérophospholipides, sphingomyélines), de <strong>galactolipides</strong> et de <strong>sulfolipides</strong>. Leur caractère amphiphile permet la formation de la bicouche lipidique. Les triglycérides sont les lipides de réserve énergétique."},
+
+  {num:3,top:"Solubilité des Acides Gras",
+   q:"À partir de combien d'atomes de carbone un acide gras devient-il insoluble dans l'eau ?",
+   chips:["Solubilité","Nombre de carbones"],
+   opts:["À partir de C4","À partir de C8","À partir de C16","Ils sont tous solubles dans l'eau"],c:1,
+   fb:"Dès que la chaîne carbonée devient supérieure à <strong>8 atomes de carbone</strong>, l'acide gras devient <strong>insoluble dans l'eau</strong>. Par contre, les acides gras sous forme de <strong>sels alcalins</strong> (savons) sont solubles dans l'eau, car la tête polaire –COO⁻ permet la solubilisation."},
+
+  {num:4,top:"Oxydation — Rancissement",
+   q:"Le rancissement des corps gras est dû à :",
+   chips:["Odeur forte","Saveur âcre","Rancissement"],
+   opts:["L'hydrolyse enzymatique par les lipases","L'oxydation spontanée des acides gras insaturés à l'air","La saponification par la soude","La réaction avec l'iode"],c:1,
+   fb:"Le <strong>rancissement</strong> est causé par l'<strong>oxydation spontanée</strong> des acides gras (surtout insaturés) à l'air libre. Il entraîne une odeur forte et une saveur âcre désagréables. Les doubles liaisons sont particulièrement sensibles à l'oxydation. Les antioxydants (vitamine E) protègent contre ce phénomène."},
+
+  {num:5,top:"Réaction d'Alcoolyse",
+   q:"La réaction de transestérification (alcoolyse) d'un triglycéride avec du méthanol produit :",
+   chips:["Méthanol","Transestérification"],
+   opts:["Du glycérol + acides gras libres","Du glycérol + sels de sodium","Des esters méthyliques d'AG + glycérol","Du savon + eau"],c:2,
+   fb:"La <strong>transestérification</strong> (alcoolyse) d'un triglycéride avec du méthanol produit des <strong>esters méthyliques d'acides gras</strong> (EMAG) + du <strong>glycérol</strong>. Cette réaction est utilisée en chromatographie en phase gazeuse pour identifier les AG. Les EMAG sont aussi produits pour le biodiesel."},
+
+  {num:6,top:"Chromatographie en Phase Gazeuse",
+   q:"En chromatographie en phase gazeuse des acides gras, lequel sort le plus LENTEMENT ?",
+   chips:["Temps de rétention","Longueur chaîne"],
+   opts:["Les AG courts (C4)","Les AG à longue chaîne et insaturés","Les AG saturés à courte chaîne","Tous sortent en même temps"],c:1,
+   fb:"En chromatographie en phase gazeuse, les AG sortent d'autant plus <strong>lentement</strong> qu'ils ont une <strong>longue chaîne</strong> d'atomes de carbone. À nombre égal d'atomes de C, ce sont les AG <strong>insaturés</strong> qui sortent le plus lentement. La surface des pics est proportionnelle à la quantité de l'AG."},
+
+  {num:7,top:"Cardiolipides",
+   q:"Les cardiolipides (diphosphatidyl glycérol) sont caractéristiques de :",
+   chips:["Cardiolipide","Mitochondrie","Bactéries"],
+   opts:["Les membranes des cellules végétales","Les membranes bactériennes et des mitochondries cardiaques","Le cytoplasme des neurones","La surface des globules rouges"],c:1,
+   fb:"Les <strong>cardiolipides</strong> (diphosphatidylglycérol, X = glycérol) sont caractéristiques des <strong>membranes bactériennes</strong> et des <strong>membranes des mitochondries cardiaques</strong>. Leur structure particulière avec 4 chaînes d'acides gras est essentielle au fonctionnement de la chaîne respiratoire."},
+
+  {num:8,top:"Vitamines Liposolubles",
+   q:"Les vitamines liposolubles sont des lipides de la classe des :",
+   chips:["Vitamine A","Vitamine D","Vitamine E","Vitamine K"],
+   opts:["Glycérides","Phospholipides","Terpènes (lipides polyisopréniques)","Sphingolipides"],c:2,
+   fb:"Les <strong>vitamines liposolubles</strong> (A, D, E, K) appartiennent à la classe des <strong>terpènes</strong> (lipides polyisopréniques). Elles sont solubles dans les graisses et les huiles, et insolubles dans l'eau. Elles se stockent dans les tissus adipeux et hépatiques."},
+
+  {num:9,top:"Plasmalogènes",
+   q:"Les plasmalogènes se trouvent principalement dans :",
+   chips:["Plasmalogène","Liaison alcénoxy"],
+   opts:["Le tissu adipeux uniquement","Le tissu nerveux et musculaire, et dans le plasma sanguin","Uniquement dans les bactéries","Le tissu osseux"],c:1,
+   fb:"Les <strong>plasmalogènes</strong> sont des glycérophospholipides particuliers (avec une liaison alcénoxy en Cα à la place de la liaison ester). Ils sont présents dans le <strong>tissu nerveux et musculaire</strong> et dans le <strong>plasma sanguin</strong>. Ils contiennent souvent de l'éthanolamine et de l'acide arachidonique."},
+
+  {num:10,top:"Pigments Caroténoïdes",
+   q:"Les carotènes et lycopènes sont des terpènes classés parmi les :",
+   chips:["β-carotène","Lycopène","Carotte","Tomate"],
+   opts:["Vitamines liposolubles","Pigments (lipides riches en doubles liaisons conjuguées)","Acides gras essentiels","Cérébrosides"],c:1,
+   fb:"Les <strong>carotènes</strong> (pigments jaunes-orangés de la carotte) et les <strong>lycopènes</strong> (pigments rouges de la tomate) sont des <strong>pigments caroténoïdes</strong>, des terpènes très riches en doubles liaisons conjuguées. Ces doubles liaisons conjuguées absorbent la lumière visible, leur donnant leurs couleurs caractéristiques."},
+];
+
+/* ══════════════════════════════════
+   ÉTAT GLOBAL
+══════════════════════════════════ */
+const ST={
+  1:{c:0,a:new Set(),tot:15},
+  2:{c:0,a:new Set(),tot:15},
+  3:{c:0,a:new Set(),tot:10}
+};
+
+function updG(){
+  const t=ST[1].a.size+ST[2].a.size+ST[3].a.size;
+  document.getElementById('gA').textContent=t;
+  document.getElementById('gP').textContent=Math.round(t/40*100)+'%';
+}
+function updS(ex){
+  const s=ST[ex],n=s.a.size,tot=s.tot;
+  document.getElementById('s'+ex).textContent=s.c+'/'+tot;
+  document.getElementById('pl'+ex).textContent=n+' / '+tot+' répondues';
+  document.getElementById('pf'+ex).style.width=(n/tot*100)+'%';
+  updG();
+}
+
+/* ══════════════════════════════════
+   RENDER
+══════════════════════════════════ */
+function rEx1(){
+  const c=document.getElementById('c1');c.innerHTML='';
+  const L=['A','B','C','D'];
+  D1.forEach(q=>{
+    const d=document.createElement('div');d.className='qc';d.dataset.num=q.num;
+    d.innerHTML=`<div class="qc-hd"><div class="qnum">${q.num}</div><div style="flex:1"><div class="qtop">${q.top}</div><div class="qq">${q.q}</div></div></div>
+    <div class="opts">${q.opts.map((o,i)=>`<button class="opt" onclick="ans(1,${q.num},${i})"><span class="oltr">${L[i]}</span>${o}</button>`).join('')}</div>
+    <div class="fbx" id="f1-${q.num}"></div>`;
+    c.appendChild(d);
+  });
+}
+
+function rEx2(){
+  const c=document.getElementById('c2');c.innerHTML='';
+  D2.forEach(q=>{
+    const d=document.createElement('div');d.className='sc';d.dataset.num=q.num;
+    d.innerHTML=`<div class="sc-hd"><div class="snum">${q.num}</div><div style="flex:1"><div class="stop">${q.top}</div><div class="sq">${q.q}</div></div></div>
+    <div class="sg">${q.opts.map((o,i)=>`<div class="so" onclick="ans(2,${q.num},${i})">${o.svg}<div class="sl">${o.lb}</div></div>`).join('')}</div>
+    <div class="sfb" id="f2-${q.num}"></div>`;
+    c.appendChild(d);
+  });
+}
+
+function rEx3(){
+  const c=document.getElementById('c3');c.innerHTML='';
+  D3.forEach(q=>{
+    const d=document.createElement('div');d.className='cc';d.dataset.num=q.num;
+    d.innerHTML=`<div class="cc-hd"><div class="cnum">${q.num}</div><div style="flex:1"><div class="ctop">${q.top}</div><div class="cq">${q.q}</div></div></div>
+    <div class="chips">${q.chips.map(a=>`<span class="chip">${a}</span>`).join('')}</div>
+    <div class="copts">${q.opts.map((o,i)=>`<button class="copt" onclick="ans(3,${q.num},${i})">${o}</button>`).join('')}</div>
+    <div class="cfb" id="f3-${q.num}"></div>`;
+    c.appendChild(d);
+  });
+}
+
+/* ══════════════════════════════════
+   ANSWER
+══════════════════════════════════ */
+function ans(ex,num,idx){
+  if(ST[ex].a.has(num))return;
+  ST[ex].a.add(num);
+  const D=ex===1?D1:ex===2?D2:D3;
+  const q=D.find(x=>x.num===num);
+  const cc=ex===1?'qc':ex===2?'sc':'cc';
+  const oc=ex===1?'opt':ex===2?'so':'copt';
+  const card=document.querySelector(`.${cc}[data-num="${num}"]`);
+  const opts=card.querySelectorAll('.'+oc);
+  const fb=document.getElementById(`f${ex}-${num}`);
+  const ok=idx===q.c;
+  if(ok)ST[ex].c++;
+  opts.forEach((o,i)=>{
+    o.classList.add('dis');
+    if(i===q.c)o.classList.add(i===idx?'cor':'sho');
+    else if(i===idx)o.classList.add('wrg');
+  });
+  card.classList.add(ok?'ok':'no');
+  const lbl=ex===2?D2.find(x=>x.num===num).opts[q.c].lb:q.opts[q.c];
+  fb.innerHTML=ok?`<span class="okt">✓ Bonne réponse !</span>  ${q.fb}`:`<span class="not">✗ Incorrect.</span> Bonne réponse : <strong>${lbl}</strong>.  ${q.fb}`;
+  fb.classList.add('vis');
+  updS(ex);
+}
+
+/* ══════════════════════════════════
+   RESET
+══════════════════════════════════ */
+function reset(ex){
+  ST[ex]={c:0,a:new Set(),tot:ST[ex].tot};
+  if(ex===1)rEx1();else if(ex===2)rEx2();else rEx3();
+  updS(ex);
+}
+
+/* ══════════════════════════════════
+   TABS
+══════════════════════════════════ */
+function showTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('a'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('a');
+}
+
+/* INIT */
+rEx1();rEx2();rEx3();
+updS(1);updS(2);updS(3);
+</script>
+</body>
+</html>

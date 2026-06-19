@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biochimie – Les Protéines · Fiches d'Exercices</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0c14;--surface:#111420;--surface2:#181d2e;
+  --blue:#4f9cf9;--bdim:#1e3a6e;--bpal:#0a1628;
+  --amber:#f0a500;--apal:#241900;
+  --red:#f87171;--rpal:#1e0a0a;
+  --em:#34d399;--epal:#052015;
+  --purple:#a78bfa;--ppal:#140d2a;
+  --text:#dde3f0;--muted:#6b7a99;--border:#1f2640;--white:#f8faff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+header{background:linear-gradient(160deg,#0a0c14 0%,#0a1628 40%,#0a0c14 100%);padding:3rem 2rem 2rem;text-align:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% -10%,rgba(79,156,249,.18) 0%,transparent 65%)}
+.badge{display:inline-flex;align-items:center;background:var(--bpal);border:1px solid var(--bdim);color:var(--blue);font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .85rem;border-radius:999px;margin-bottom:1rem;position:relative}
+header h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.4rem);color:var(--white);position:relative}
+header h1 span{color:var(--blue)}
+header p{color:var(--muted);margin-top:.5rem;font-size:.9rem;position:relative;font-weight:300}
+.stats-bar{display:flex;justify-content:center;gap:2.5rem;margin-top:1.8rem;flex-wrap:wrap;position:relative}
+.stat{text-align:center}
+.stn{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--blue);line-height:1}
+.stl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-top:.2rem}
+
+.tabs-wrap{max-width:1000px;margin:1.8rem auto 0;padding:0 1.5rem;display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.tab{padding:.5rem 1.2rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-family:'IBM Plex Sans',sans-serif;font-size:.82rem;cursor:pointer;transition:all .2s;white-space:nowrap}
+.tab:hover,.tab.a{border-color:var(--bdim);color:var(--blue);background:var(--bpal);font-weight:500}
+.tab.am:hover,.tab.am.a{border-color:#6b4800;color:var(--amber);background:var(--apal)}
+.tab.pu:hover,.tab.pu.a{border-color:#4c3888;color:var(--purple);background:var(--ppal)}
+
+main{max-width:1000px;margin:0 auto;padding:2rem 1.5rem 6rem}
+.panel{display:none}.panel.active{display:block}
+
+.sec-hd{display:flex;align-items:center;gap:1rem;margin-bottom:1.8rem}
+.sec-ic{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.ib{background:var(--bpal);border:1px solid var(--bdim)}
+.ia{background:var(--apal);border:1px solid #6b4800}
+.ip{background:var(--ppal);border:1px solid #4c3888}
+.sec-tx h2{font-family:'Cormorant Garamond',serif;font-size:1.55rem;color:var(--white)}
+.sec-tx p{font-size:.82rem;color:var(--muted);margin-top:.1rem;font-weight:300}
+
+.ctrl{display:flex;gap:.6rem;margin-bottom:1.4rem;flex-wrap:wrap;align-items:center}
+.btn{padding:.5rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:.82rem;cursor:pointer;transition:all .2s}
+.btn:hover{border-color:var(--bdim);color:var(--blue)}
+.btn.amb:hover{border-color:#6b4800;color:var(--amber)}
+.btn.pur:hover{border-color:#4c3888;color:var(--purple)}
+
+.scorebox{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem 1.4rem;margin-bottom:1.4rem;display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.scn{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;line-height:1}
+.scl{font-size:.78rem;color:var(--muted);margin-top:.2rem}
+.plbl{font-size:.72rem;color:var(--muted);margin-bottom:.3rem;text-align:right}
+.pbar{background:var(--surface);border-radius:999px;height:5px;overflow:hidden;border:1px solid var(--border)}
+.pfill{height:100%;border-radius:999px;transition:width .4s;width:0%}
+.fb1{background:linear-gradient(90deg,var(--bdim),var(--blue))}
+.fa1{background:linear-gradient(90deg,#6b4800,var(--amber))}
+.fp1{background:linear-gradient(90deg,#4c3888,var(--purple))}
+
+/* EX1 QCM */
+.qc{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:1rem;overflow:hidden;transition:border-color .2s}
+.qc.ok{border-color:#0c5c38}.qc.no{border-color:#7f1d1d}
+.qc-hd{padding:1.1rem 1.4rem .8rem;display:flex;gap:.9rem;align-items:flex-start}
+.qnum{min-width:34px;height:34px;border-radius:50%;background:var(--bpal);border:1px solid var(--bdim);color:var(--blue);font-family:'IBM Plex Mono',monospace;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.qtop{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);margin-bottom:.22rem}
+.qq{font-size:.95rem;color:var(--text);line-height:1.45}
+.opts{padding:0 1.4rem 1.2rem;display:flex;flex-direction:column;gap:.45rem}
+.opt{padding:.6rem 1rem;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:.875rem;cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:.6rem;text-align:left}
+.opt:hover{border-color:var(--blue);color:var(--blue)}
+.opt.cor{background:var(--epal);border-color:#0c5c38;color:var(--em);cursor:default}
+.opt.wrg{background:var(--rpal);border-color:#7f1d1d;color:var(--red);cursor:default}
+.opt.sho{background:var(--epal);border-color:#0c5c38;color:var(--em);cursor:default}
+.opt.dis{cursor:default}
+.oltr{min-width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:.72rem;flex-shrink:0}
+.fbx{font-size:.8rem;padding:0 1.4rem .9rem;color:var(--muted);display:none;line-height:1.55;font-weight:300}
+.fbx.vis{display:block}
+.okt{color:var(--em);font-weight:500}.not{color:var(--red);font-weight:500}
+
+/* EX2 STRUCTURES */
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:1.2rem;overflow:hidden}
+.sc.ok{border-color:#0c5c38}.sc.no{border-color:#7f1d1d}
+.sc-hd{padding:1.1rem 1.4rem .7rem;display:flex;gap:.9rem;align-items:flex-start}
+.snum{min-width:34px;height:34px;border-radius:50%;background:var(--apal);border:1px solid #6b4800;color:var(--amber);font-family:'IBM Plex Mono',monospace;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.stop{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--amber);margin-bottom:.22rem}
+.sq{font-size:.95rem;color:var(--text);line-height:1.45}
+.sg{padding:0 1.4rem 1.2rem;display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.so{border-radius:10px;border:2px solid var(--border);background:var(--surface2);cursor:pointer;transition:all .18s;display:flex;flex-direction:column;align-items:center}
+.so:hover{border-color:var(--amber)}
+.so svg{width:100%;height:130px;display:block}
+.sl{font-size:.78rem;color:var(--muted);padding:.35rem;text-align:center;border-top:1px solid var(--border);width:100%;font-family:'IBM Plex Mono',monospace}
+.so.cor{border-color:var(--em);background:var(--epal);cursor:default}
+.so.cor .sl{color:var(--em);border-color:#0c5c38}
+.so.wrg{border-color:var(--red);background:var(--rpal);cursor:default}
+.so.wrg .sl{color:var(--red);border-color:#7f1d1d}
+.so.sho{border-color:var(--em);background:var(--epal);cursor:default}
+.so.sho .sl{color:var(--em);border-color:#0c5c38}
+.so.dis{cursor:default}
+.sfb{font-size:.8rem;padding:0 1.4rem .9rem;color:var(--muted);display:none;line-height:1.55;font-weight:300}
+.sfb.vis{display:block}
+
+/* EX3 */
+.cc{background:var(--surface);border:1px solid var(--border);border-radius:14px;margin-bottom:1rem;overflow:hidden}
+.cc.ok{border-color:#0c5c38}.cc.no{border-color:#7f1d1d}
+.cc-hd{padding:1.1rem 1.4rem .8rem;display:flex;gap:.9rem;align-items:flex-start}
+.cnum{min-width:34px;height:34px;border-radius:50%;background:var(--ppal);border:1px solid #4c3888;color:var(--purple);font-family:'IBM Plex Mono',monospace;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ctop{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--purple);margin-bottom:.22rem}
+.cq{font-size:.95rem;color:var(--text);line-height:1.45}
+.chips{padding:0 1.4rem .5rem}
+.chip{display:inline-block;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:.25rem .65rem;font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--purple);margin:.2rem .2rem 0 0}
+.copts{padding:0 1.4rem 1.2rem;display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.copt{padding:.55rem .8rem;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'IBM Plex Sans',sans-serif;font-size:.845rem;cursor:pointer;transition:all .18s;text-align:center}
+.copt:hover{border-color:var(--purple);color:var(--purple)}
+.copt.cor{background:var(--epal);border-color:#0c5c38;color:var(--em);cursor:default}
+.copt.wrg{background:var(--rpal);border-color:#7f1d1d;color:var(--red);cursor:default}
+.copt.sho{background:var(--epal);border-color:#0c5c38;color:var(--em);cursor:default}
+.copt.dis{cursor:default}
+.cfb{font-size:.8rem;padding:0 1.4rem .9rem;color:var(--muted);display:none;line-height:1.55;font-weight:300}
+.cfb.vis{display:block}
+
+.aa-counter{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted);margin-bottom:.5rem;display:flex;gap:.3rem;flex-wrap:wrap}
+.aa-dot{width:16px;height:16px;border-radius:50%;background:var(--border);transition:background .3s;display:inline-block}
+.aa-dot.done-ok{background:var(--em)}
+.aa-dot.done-no{background:var(--red)}
+
+@media(max-width:560px){.sg,.copts{grid-template-columns:1fr 1fr}.so svg{height:95px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">📘 Biochimie S3 · Pr. Kettani</div>
+  <h1>Les <span>Protéines</span></h1>
+  <p>3 exercices interactifs — 40 questions niveau Licence</p>
+  <div class="stats-bar">
+    <div class="stat"><div class="stn">40</div><div class="stl">Questions</div></div>
+    <div class="stat"><div class="stn" id="gA">0</div><div class="stl">Répondues</div></div>
+    <div class="stat"><div class="stn" id="gP">0%</div><div class="stl">Progression</div></div>
+  </div>
+</header>
+
+<div class="tabs-wrap">
+  <button class="tab a" onclick="showTab('e1',this)">📖 Exercice 1 — QCM Cours (10)</button>
+  <button class="tab am" onclick="showTab('e2',this)">🧪 Exercice 2 — Structures des 20 AA (20)</button>
+  <button class="tab pu" onclick="showTab('e3',this)">🔬 Exercice 3 — Classification (10)</button>
+</div>
+
+<main>
+<div id="e1" class="panel active">
+  <div class="sec-hd"><div class="sec-ic ib">📖</div><div class="sec-tx"><h2>QCM — Questions de Cours</h2><p>10 questions directes · une seule bonne réponse</p></div></div>
+  <div class="ctrl"><button class="btn" onclick="reset(1)">🔄 Réinitialiser</button></div>
+  <div class="scorebox">
+    <div><div class="scn" id="s1" style="color:var(--blue)">0/10</div><div class="scl">Score</div></div>
+    <div style="flex:1"><div class="plbl" id="pl1">0 / 10 répondues</div><div class="pbar"><div class="pfill fb1" id="pf1"></div></div></div>
+  </div>
+  <div id="c1"></div>
+</div>
+
+<div id="e2" class="panel">
+  <div class="sec-hd"><div class="sec-ic ia">🧪</div><div class="sec-tx"><h2>Identifier la Structure Chimique — Les 20 Acides Aminés</h2><p>20 questions · choisissez la bonne structure parmi 4 molécules dessinées</p></div></div>
+  <div class="ctrl">
+    <button class="btn amb" onclick="reset(2)">🔄 Réinitialiser</button>
+  </div>
+  <div class="scorebox">
+    <div><div class="scn" id="s2" style="color:var(--amber)">0/20</div><div class="scl">Score</div></div>
+    <div style="flex:1">
+      <div class="plbl" id="pl2">0 / 20 répondues</div>
+      <div class="pbar"><div class="pfill fa1" id="pf2"></div></div>
+      <div class="aa-counter" id="aaDots"></div>
+    </div>
+  </div>
+  <div id="c2"></div>
+</div>
+
+<div id="e3" class="panel">
+  <div class="sec-hd"><div class="sec-ic ip">🔬</div><div class="sec-tx"><h2>Classification des Acides Aminés</h2><p>10 questions · identifiez la classe de chaque acide aminé</p></div></div>
+  <div class="ctrl"><button class="btn pur" onclick="reset(3)">🔄 Réinitialiser</button></div>
+  <div class="scorebox">
+    <div><div class="scn" id="s3" style="color:var(--purple)">0/10</div><div class="scl">Score</div></div>
+    <div style="flex:1"><div class="plbl" id="pl3">0 / 10 répondues</div><div class="pbar"><div class="pfill fp1" id="pf3"></div></div></div>
+  </div>
+  <div id="c3"></div>
+</div>
+</main>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   SVG LIBRARY — tous les 20 acides aminés
+   Fond #181d2e, traits #9ca3af, groupes clés colorés
+══════════════════════════════════════════════════════ */
+const BG='#181d2e', LN='#9ca3af', BL='#4f9cf9', AM='#f0a500', PU='#a78bfa';
+function svg(content){return`<svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="120" fill="${BG}" rx="8"/>${content}</svg>`}
+
+const M={
+/* 1 GLYCINE — R=H */
+glycine: svg(`
+  <text x="20" y="55" font-size="11" fill="${LN}" font-family="monospace">H</text>
+  <text x="20" y="70" font-size="11" fill="${BL}" font-family="monospace">H₂N</text>
+  <line x1="52" y1="65" x2="76" y2="65" stroke="${LN}" stroke-width="2"/>
+  <text x="50" y="57" font-size="11" fill="${LN}" font-family="monospace">C</text>
+  <text x="78" y="68" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="58" y1="57" x2="58" y2="75" stroke="${LN}" stroke-width="1.5"/>
+  <text x="42" y="80" font-size="11" fill="${LN}" font-family="monospace">H</text>
+  <text x="30" y="105" font-size="10" fill="#6b7a99" font-family="monospace">R = H  (aucun substituant)</text>
+`),
+
+/* 2 ALANINE — R=CH3 */
+alanine: svg(`
+  <text x="10" y="65" font-size="13" fill="${BL}" font-family="monospace">H₃C</text>
+  <line x1="44" y1="60" x2="72" y2="60" stroke="${LN}" stroke-width="2"/>
+  <text x="72" y="56" font-size="11" fill="${LN}" font-family="monospace">C</text>
+  <text x="76" y="50" font-size="10" fill="${LN}" font-family="monospace">H</text>
+  <line x1="84" y1="60" x2="112" y2="60" stroke="${LN}" stroke-width="2"/>
+  <text x="114" y="65" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <text x="72" y="80" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+  <line x1="80" y1="65" x2="80" y2="76" stroke="${LN}" stroke-width="1.5"/>
+`),
+
+/* 3 VALINE — R=(CH3)2CH */
+valine: svg(`
+  <text x="8" y="40" font-size="11" fill="${BL}" font-family="monospace">H₃C</text>
+  <line x1="36" y1="36" x2="56" y2="52" stroke="${LN}" stroke-width="2"/>
+  <text x="8" y="76" font-size="11" fill="${BL}" font-family="monospace">H₃C</text>
+  <line x1="36" y1="72" x2="56" y2="56" stroke="${LN}" stroke-width="2"/>
+  <line x1="56" y1="54" x2="82" y2="54" stroke="${LN}" stroke-width="2"/>
+  <line x1="82" y1="54" x2="98" y2="42" stroke="${LN}" stroke-width="2"/>
+  <text x="100" y="40" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="82" y1="54" x2="82" y2="72" stroke="${LN}" stroke-width="1.5"/>
+  <text x="68" y="86" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+`),
+
+/* 4 LEUCINE — R=CH2CH(CH3)2 */
+leucine: svg(`
+  <text x="5" y="38" font-size="10" fill="${BL}" font-family="monospace">H₃C</text>
+  <line x1="30" y1="34" x2="48" y2="48" stroke="${LN}" stroke-width="2"/>
+  <text x="5" y="70" font-size="10" fill="${BL}" font-family="monospace">H₃C</text>
+  <line x1="30" y1="66" x2="48" y2="52" stroke="${LN}" stroke-width="2"/>
+  <line x1="48" y1="50" x2="70" y2="50" stroke="${LN}" stroke-width="2"/>
+  <line x1="70" y1="50" x2="86" y2="37" stroke="${LN}" stroke-width="2"/>
+  <line x1="86" y1="37" x2="104" y2="50" stroke="${LN}" stroke-width="2"/>
+  <text x="106" y="37" font-size="10" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="86" y1="37" x2="86" y2="68" stroke="${LN}" stroke-width="1.5"/>
+  <text x="72" y="82" font-size="10" fill="${BL}" font-family="monospace">NH₂</text>
+`),
+
+/* 5 ISOLEUCINE — R=CH(CH3)CH2CH3 */
+isoleucine: svg(`
+  <text x="5" y="40" font-size="10" fill="${BL}" font-family="monospace">H₃C</text>
+  <line x1="30" y1="36" x2="50" y2="50" stroke="${LN}" stroke-width="2"/>
+  <text x="5" y="70" font-size="10" fill="${BL}" font-family="monospace">CH₃</text>
+  <line x1="32" y1="65" x2="50" y2="53" stroke="${LN}" stroke-width="2"/>
+  <line x1="50" y1="52" x2="70" y2="52" stroke="${LN}" stroke-width="2"/>
+  <line x1="70" y1="52" x2="88" y2="39" stroke="${LN}" stroke-width="2"/>
+  <line x1="88" y1="39" x2="106" y2="52" stroke="${LN}" stroke-width="2"/>
+  <text x="108" y="39" font-size="10" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="88" y1="39" x2="88" y2="70" stroke="${LN}" stroke-width="1.5"/>
+  <text x="74" y="84" font-size="10" fill="${BL}" font-family="monospace">NH₂</text>
+`),
+
+/* 6 SERINE — R=CH2OH */
+serine: svg(`
+  <text x="10" y="65" font-size="13" fill="${AM}" font-family="monospace">HO</text>
+  <line x1="34" y1="60" x2="58" y2="60" stroke="${LN}" stroke-width="2"/>
+  <line x1="58" y1="60" x2="74" y2="46" stroke="${LN}" stroke-width="2"/>
+  <line x1="74" y1="46" x2="90" y2="60" stroke="${LN}" stroke-width="2"/>
+  <text x="92" y="44" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="74" y1="46" x2="74" y2="73" stroke="${LN}" stroke-width="1.5"/>
+  <text x="60" y="87" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+  <text x="20" y="108" font-size="10" fill="#6b7a99" font-family="monospace">R = –CH₂–OH</text>
+`),
+
+/* 7 THREONINE — R=CH(OH)CH3 */
+threonine: svg(`
+  <text x="8" y="62" font-size="12" fill="${BL}" font-family="monospace">H₃C</text>
+  <line x1="38" y1="57" x2="58" y2="57" stroke="${LN}" stroke-width="2"/>
+  <text x="59" y="52" font-size="11" fill="${AM}" font-family="monospace">OH</text>
+  <line x1="58" y1="57" x2="76" y2="44" stroke="${LN}" stroke-width="2"/>
+  <line x1="76" y1="44" x2="94" y2="57" stroke="${LN}" stroke-width="2"/>
+  <text x="96" y="43" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="76" y1="44" x2="76" y2="73" stroke="${LN}" stroke-width="1.5"/>
+  <text x="62" y="87" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+`),
+
+/* 8 CYSTEINE — R=CH2SH */
+cysteine: svg(`
+  <text x="10" y="65" font-size="13" fill="${AM}" font-family="monospace" font-weight="bold">HS</text>
+  <line x1="34" y1="60" x2="58" y2="60" stroke="${LN}" stroke-width="2"/>
+  <line x1="58" y1="60" x2="74" y2="46" stroke="${LN}" stroke-width="2"/>
+  <line x1="74" y1="46" x2="90" y2="60" stroke="${LN}" stroke-width="2"/>
+  <text x="92" y="44" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="74" y1="46" x2="74" y2="73" stroke="${LN}" stroke-width="1.5"/>
+  <text x="60" y="87" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+  <text x="20" y="108" font-size="10" fill="#6b7a99" font-family="monospace">R = –CH₂–SH (thiol)</text>
+`),
+
+/* 9 METHIONINE — R=CH2CH2SCH3 */
+methionine: svg(`
+  <text x="10" y="65" font-size="13" fill="${BL}" font-family="monospace">H₃C</text>
+  <line x1="44" y1="60" x2="62" y2="60" stroke="${LN}" stroke-width="2"/>
+  <text x="63" y="66" font-size="14" fill="${AM}" font-family="monospace" font-weight="bold">S</text>
+  <line x1="76" y1="60" x2="96" y2="60" stroke="${LN}" stroke-width="2"/>
+  <line x1="96" y1="60" x2="112" y2="47" stroke="${LN}" stroke-width="2"/>
+  <line x1="112" y1="47" x2="128" y2="60" stroke="${LN}" stroke-width="2"/>
+  <line x1="128" y1="60" x2="144" y2="47" stroke="${LN}" stroke-width="2"/>
+  <text x="146" y="45" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="128" y1="60" x2="128" y2="75" stroke="${LN}" stroke-width="1.5"/>
+  <text x="114" y="89" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+`),
+
+/* 10 ASPARTATE — R=CH2COOH */
+aspartate: svg(`
+  <text x="8" y="65" font-size="11" fill="${LN}" font-family="monospace">HOOC</text>
+  <line x1="46" y1="60" x2="68" y2="60" stroke="${LN}" stroke-width="2"/>
+  <line x1="68" y1="60" x2="84" y2="46" stroke="${LN}" stroke-width="2"/>
+  <line x1="84" y1="46" x2="100" y2="60" stroke="${LN}" stroke-width="2"/>
+  <text x="102" y="44" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="84" y1="46" x2="84" y2="73" stroke="${LN}" stroke-width="1.5"/>
+  <text x="70" y="87" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+  <text x="10" y="108" font-size="10" fill="#6b7a99" font-family="monospace">R = –CH₂–COOH</text>
+`),
+
+/* 11 ASPARAGINE — R=CH2CONH2 */
+asparagine: svg(`
+  <text x="8" y="65" font-size="11" fill="${BL}" font-family="monospace">H₂N</text>
+  <line x1="36" y1="60" x2="54" y2="60" stroke="${LN}" stroke-width="2"/>
+  <text x="54" y="55" font-size="11" fill="${LN}" font-family="monospace">C=O</text>
+  <line x1="76" y1="60" x2="92" y2="47" stroke="${LN}" stroke-width="2"/>
+  <line x1="92" y1="47" x2="108" y2="60" stroke="${LN}" stroke-width="2"/>
+  <text x="110" y="45" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="92" y1="47" x2="92" y2="75" stroke="${LN}" stroke-width="1.5"/>
+  <text x="78" y="89" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+  <text x="5" y="108" font-size="10" fill="#6b7a99" font-family="monospace">R = –CH₂–CO–NH₂</text>
+`),
+
+/* 12 GLUTAMATE — R=CH2CH2COOH */
+glutamate: svg(`
+  <text x="8" y="65" font-size="11" fill="${LN}" font-family="monospace">HOOC</text>
+  <line x1="46" y1="60" x2="64" y2="60" stroke="${LN}" stroke-width="2"/>
+  <line x1="64" y1="60" x2="80" y2="47" stroke="${LN}" stroke-width="2"/>
+  <line x1="80" y1="47" x2="96" y2="60" stroke="${LN}" stroke-width="2"/>
+  <line x1="96" y1="60" x2="112" y2="47" stroke="${LN}" stroke-width="2"/>
+  <text x="114" y="45" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="96" y1="60" x2="96" y2="75" stroke="${LN}" stroke-width="1.5"/>
+  <text x="82" y="89" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+  <text x="5" y="108" font-size="10" fill="#6b7a99" font-family="monospace">R = –CH₂–CH₂–COOH</text>
+`),
+
+/* 13 GLUTAMINE — R=CH2CH2CONH2 */
+glutamine: svg(`
+  <text x="8" y="65" font-size="11" fill="${BL}" font-family="monospace">H₂N</text>
+  <line x1="36" y1="60" x2="52" y2="60" stroke="${LN}" stroke-width="2"/>
+  <text x="52" y="55" font-size="11" fill="${LN}" font-family="monospace">C=O</text>
+  <line x1="74" y1="60" x2="90" y2="47" stroke="${LN}" stroke-width="2"/>
+  <line x1="90" y1="47" x2="106" y2="60" stroke="${LN}" stroke-width="2"/>
+  <line x1="106" y1="60" x2="122" y2="47" stroke="${LN}" stroke-width="2"/>
+  <text x="124" y="45" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="106" y1="60" x2="106" y2="75" stroke="${LN}" stroke-width="1.5"/>
+  <text x="92" y="89" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+  <text x="5" y="108" font-size="10" fill="#6b7a99" font-family="monospace">R = –(CH₂)₂–CO–NH₂</text>
+`),
+
+/* 14 LYSINE — R=(CH2)4NH2 */
+lysine: svg(`
+  <text x="5" y="65" font-size="11" fill="${AM}" font-family="monospace">H₂N</text>
+  <line x1="34" y1="60" x2="50" y2="60" stroke="${LN}" stroke-width="2"/>
+  <line x1="50" y1="60" x2="64" y2="47" stroke="${LN}" stroke-width="2"/>
+  <line x1="64" y1="47" x2="78" y2="60" stroke="${LN}" stroke-width="2"/>
+  <line x1="78" y1="60" x2="92" y2="47" stroke="${LN}" stroke-width="2"/>
+  <line x1="92" y1="47" x2="106" y2="60" stroke="${LN}" stroke-width="2"/>
+  <text x="108" y="47" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="92" y1="47" x2="92" y2="75" stroke="${LN}" stroke-width="1.5"/>
+  <text x="78" y="89" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+  <text x="5" y="108" font-size="10" fill="#6b7a99" font-family="monospace">R = –(CH₂)₄–NH₂</text>
+`),
+
+/* 15 ARGININE — R avec guanidyle */
+arginine: svg(`
+  <text x="5" y="44" font-size="10" fill="${AM}" font-family="monospace">H₂N</text>
+  <line x1="33" y1="40" x2="52" y2="53" stroke="${LN}" stroke-width="1.8"/>
+  <text x="5" y="72" font-size="10" fill="${AM}" font-family="monospace">H₂N</text>
+  <line x1="33" y1="68" x2="52" y2="55" stroke="${LN}" stroke-width="1.8"/>
+  <text x="48" y="62" font-size="11" fill="${AM}" font-family="monospace" font-weight="bold">C</text>
+  <text x="56" y="40" font-size="9" fill="${AM}" font-family="monospace">=NH</text>
+  <line x1="58" y1="42" x2="58" y2="52" stroke="${AM}" stroke-width="1.5"/>
+  <line x1="64" y1="55" x2="84" y2="55" stroke="${LN}" stroke-width="1.8"/>
+  <line x1="84" y1="55" x2="100" y2="42" stroke="${LN}" stroke-width="1.8"/>
+  <text x="102" y="40" font-size="10" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="84" y1="55" x2="84" y2="73" stroke="${LN}" stroke-width="1.5"/>
+  <text x="70" y="87" font-size="10" fill="${BL}" font-family="monospace">NH₂</text>
+  <text x="5" y="108" font-size="10" fill="#6b7a99" font-family="monospace">Guanidyle</text>
+`),
+
+/* 16 HISTIDINE — imidazole */
+histidine: svg(`
+  <polygon points="22,65 36,42 58,42 66,65 48,78" fill="none" stroke="${PU}" stroke-width="2"/>
+  <text x="24" y="60" font-size="9" fill="${LN}" font-family="monospace">N</text>
+  <text x="50" y="45" font-size="9" fill="${PU}" font-family="monospace">NH</text>
+  <line x1="66" y1="63" x2="88" y2="63" stroke="${LN}" stroke-width="2"/>
+  <line x1="88" y1="63" x2="104" y2="50" stroke="${LN}" stroke-width="2"/>
+  <text x="106" y="48" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="88" y1="63" x2="88" y2="80" stroke="${LN}" stroke-width="1.5"/>
+  <text x="74" y="94" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+  <text x="5" y="112" font-size="10" fill="#6b7a99" font-family="monospace">Imidazole</text>
+`),
+
+/* 17 PHENYLALANINE — phényl */
+phenylalanine: svg(`
+  <polygon points="36,32 56,20 76,32 76,56 56,68 36,56" fill="none" stroke="${BL}" stroke-width="2"/>
+  <line x1="56" y1="68" x2="56" y2="84" stroke="${LN}" stroke-width="2"/>
+  <line x1="56" y1="84" x2="78" y2="84" stroke="${LN}" stroke-width="2"/>
+  <line x1="78" y1="84" x2="96" y2="71" stroke="${LN}" stroke-width="2"/>
+  <text x="98" y="69" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="78" y1="84" x2="78" y2="99" stroke="${LN}" stroke-width="1.5"/>
+  <text x="62" y="110" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+`),
+
+/* 18 TYROSINE — phénol */
+tyrosine: svg(`
+  <text x="5" y="28" font-size="11" fill="${AM}" font-family="monospace">HO</text>
+  <line x1="27" y1="24" x2="37" y2="24" stroke="${LN}" stroke-width="1.5"/>
+  <polygon points="37,16 53,8 69,16 69,32 53,40 37,32" fill="none" stroke="${BL}" stroke-width="2"/>
+  <line x1="53" y1="40" x2="53" y2="57" stroke="${LN}" stroke-width="2"/>
+  <line x1="53" y1="57" x2="75" y2="57" stroke="${LN}" stroke-width="2"/>
+  <line x1="75" y1="57" x2="91" y2="44" stroke="${LN}" stroke-width="2"/>
+  <text x="93" y="42" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="75" y1="57" x2="75" y2="74" stroke="${LN}" stroke-width="1.5"/>
+  <text x="59" y="88" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+  <text x="5" y="110" font-size="10" fill="#6b7a99" font-family="monospace">Phénol (benzène + OH)</text>
+`),
+
+/* 19 TRYPTOPHANE — indole */
+tryptophane: svg(`
+  <polygon points="12,65 28,43 50,43 58,65 50,80 28,80" fill="none" stroke="${BL}" stroke-width="1.8"/>
+  <polygon points="50,43 70,31 84,43 84,65 70,77 58,65" fill="none" stroke="${BL}" stroke-width="1.6"/>
+  <text x="32" y="62" font-size="9" fill="${LN}" font-family="monospace">NH</text>
+  <line x1="84" y1="54" x2="106" y2="54" stroke="${LN}" stroke-width="2"/>
+  <line x1="106" y1="54" x2="123" y2="64" stroke="${LN}" stroke-width="2"/>
+  <text x="125" y="63" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <line x1="106" y1="54" x2="106" y2="80" stroke="${LN}" stroke-width="1.5"/>
+  <text x="89" y="94" font-size="11" fill="${BL}" font-family="monospace">NH₂</text>
+  <text x="5" y="112" font-size="10" fill="#6b7a99" font-family="monospace">Indole (bicyclique)</text>
+`),
+
+/* 20 PROLINE — pyrrolidine */
+proline: svg(`
+  <polygon points="44,78 32,54 54,38 76,54 70,78" fill="none" stroke="${PU}" stroke-width="2.2"/>
+  <text x="46" y="54" font-size="10" fill="${PU}" font-family="monospace" font-weight="bold">N</text>
+  <line x1="70" y1="78" x2="70" y2="60" stroke="${LN}" stroke-width="2"/>
+  <line x1="70" y1="60" x2="98" y2="60" stroke="${LN}" stroke-width="2"/>
+  <line x1="98" y1="60" x2="116" y2="47" stroke="${LN}" stroke-width="2"/>
+  <text x="118" y="45" font-size="11" fill="${LN}" font-family="monospace">COOH</text>
+  <text x="10" y="108" font-size="10" fill="#6b7a99" font-family="monospace">Cycle pyrrolidine (iminé)</text>
+`)
+};
+
+/* ══════════════════════════════════
+   EXERCICE 1 — 10 QCM DE COURS
+══════════════════════════════════ */
+const D1=[
+  {num:1,top:"Fonctions des protéines",q:"Quelle protéine transporte l'oxygène dans les globules rouges ?",
+   opts:["Insuline","Hémoglobine","Collagène","Albumine"],c:1,
+   fb:"L'<strong>hémoglobine</strong> transporte O₂ du poumon vers les tissus (4 sous-unités + 4 hèmes Fe²⁺). La myoglobine fait de même dans le muscle. L'albumine transporte les lipides."},
+  {num:2,top:"Nombre d'acides aminés",q:"Combien d'acides aminés naturels différents composent les protéines ?",
+   opts:["10","20","64","100"],c:1,
+   fb:"Les protéines naturelles sont construites à partir de <strong>20 acides aminés</strong> différents. Leur combinaison en séquences variées donne l'immense diversité des protéines."},
+  {num:3,top:"Structure générale",q:"Quelle partie est commune à tous les acides aminés ?",
+   opts:["Le radical R","Le noyau benzénique","Le squelette NH₂–Cα–COOH","La chaîne aliphatique"],c:2,
+   fb:"Le <strong>squelette commun</strong> (–NH₂, –Cα–H, –COOH) est partagé par les 20 AA. Seul le <strong>radical R</strong> diffère et détermine l'identité de chaque acide aminé."},
+  {num:4,top:"Liaison peptidique",q:"La liaison peptidique (–CO–NH–) se forme entre :",
+   opts:["–COOH d'un AA et –NH₂ du suivant","–OH et –SH de deux AA","Deux –COOH avec perte de CO₂","–NH₂ et –NH₂ de deux AA"],c:0,
+   fb:"La <strong>liaison peptidique</strong> résulte de la condensation entre le <strong>–COOH</strong> d'un AA et le <strong>–NH₂</strong> du suivant, avec élimination d'une molécule d'eau (réaction de déshydratation)."},
+  {num:5,top:"AA essentiels",q:"Combien d'acides aminés sont indispensables pour l'Homme adulte ?",
+   opts:["4","6","8","12"],c:2,
+   fb:"<strong>8 AA indispensables</strong> : Val, Leu, Ile, Thr, Met, Lys, Phe, Trp. L'organisme ne peut pas les synthétiser → apport alimentaire obligatoire."},
+  {num:6,top:"Structure primaire",q:"La structure primaire d'une protéine désigne :",
+   opts:["La forme globale en 3D","L'assemblage de plusieurs sous-unités","La séquence linéaire des AA","Les hélices et feuillets"],c:2,
+   fb:"La <strong>structure primaire</strong> = séquence linéaire des AA reliés par des liaisons peptidiques. Elle conditionne toutes les structures supérieures (II, III, IV)."},
+  {num:7,top:"Hélice alpha",q:"Combien de résidus compte une hélice α par tour complet ?",
+   opts:["2,0 résidus/tour","3,6 résidus/tour","5,0 résidus/tour","7,2 résidus/tour"],c:1,
+   fb:"L'hélice α comporte <strong>3,6 résidus/tour</strong> (pas = 0,54 nm). Les liaisons H s'établissent entre C=O du résidu i et N–H du résidu i+4, parallèlement à l'axe de l'hélice."},
+  {num:8,top:"Pont disulfure",q:"Quel acide aminé forme des ponts disulfure –S–S– par oxydation ?",
+   opts:["Méthionine","Sérine","Cystéine","Thréonine"],c:2,
+   fb:"La <strong>cystéine</strong> (–CH₂–SH) forme des ponts disulfure (–S–S–) avec une autre cystéine par oxydation. Ces ponts covalents stabilisent la structure tertiaire. La méthionine a aussi du soufre (–S–CH₃) mais ne forme pas de pont disulfure."},
+  {num:9,top:"Dosage des protéines",q:"La méthode du biuret dose les protéines par un complexe violet avec des ions :",
+   opts:["Fe³⁺ en milieu acide","Cu²⁺ en milieu alcalin","Zn²⁺ en milieu neutre","Mn²⁺ en milieu alcalin"],c:1,
+   fb:"Méthode du biuret (Gornall 1949) : ions <strong>Cu²⁺</strong> en milieu alcalin + 2 liaisons peptidiques → complexe <strong>violet</strong> absorbant à 540–550 nm. C'est la méthode classique de dosage des protéines."},
+  {num:10,top:"Endopeptidases",q:"La trypsine coupe les liaisons peptidiques après les résidus :",
+   opts:["Phe, Tyr, Trp (aromatiques)","Met uniquement","Lys, Arg (basiques)","Glu, Asp (acides)"],c:2,
+   fb:"La <strong>trypsine</strong> coupe après les résidus <strong>Lys (K)</strong> et <strong>Arg (R)</strong> (basiques). La chymotrypsine coupe après Phe/Tyr/Trp. Le BrCN coupe après Met."},
+];
+
+/* ══════════════════════════════════════════════════════
+   EXERCICE 2 — 20 QUESTIONS SUR LES 20 ACIDES AMINÉS
+══════════════════════════════════════════════════════ */
+const D2=[
+  {num:1,top:"AA aliphatique",q:"Identifiez la Glycine — l'acide aminé le plus simple (R = H, pas de carbone asymétrique) :",
+   opts:[{svg:M.glycine,lb:"Glycine (G)"},{svg:M.alanine,lb:"Alanine (A)"},{svg:M.serine,lb:"Sérine (S)"},{svg:M.cysteine,lb:"Cystéine (C)"}],c:0,
+   fb:"La <strong>glycine (G)</strong> est la plus simple : son radical R est simplement un atome d'hydrogène (–H). C'est le seul AA non chiral (pas de carbone asymétrique). Elle est très flexible et se trouve souvent dans les coudes des protéines."},
+
+  {num:2,top:"AA aliphatique",q:"Identifiez l'Alanine — R = –CH₃ (le méthyle le plus court après la glycine) :",
+   opts:[{svg:M.valine,lb:"Valine (V)"},{svg:M.glycine,lb:"Glycine (G)"},{svg:M.alanine,lb:"Alanine (A)"},{svg:M.leucine,lb:"Leucine (L)"}],c:2,
+   fb:"L'<strong>alanine (A)</strong> a un radical R = <strong>–CH₃</strong> (méthyle). C'est l'AA aliphatique le plus court après la glycine. Apolaire, hydrophobe, très abondante dans les hélices α."},
+
+  {num:3,top:"AA aliphatique",q:"Identifiez la Valine — R = –CH(CH₃)₂ (isopropyle, 2 méthyles sur le même carbone) :",
+   opts:[{svg:M.leucine,lb:"Leucine (L)"},{svg:M.isoleucine,lb:"Isoleucine (I)"},{svg:M.alanine,lb:"Alanine (A)"},{svg:M.valine,lb:"Valine (V)"}],c:3,
+   fb:"La <strong>valine (V)</strong> a un radical isopropyle : <strong>–CH(CH₃)₂</strong> — deux méthyles sur le même carbone β. AA indispensable, hydrophobe, souvent enfoui dans le cœur des protéines globulaires."},
+
+  {num:4,top:"AA aliphatique",q:"Identifiez la Leucine — R = –CH₂–CH(CH₃)₂ (chaîne plus longue que la valine) :",
+   opts:[{svg:M.leucine,lb:"Leucine (L)"},{svg:M.valine,lb:"Valine (V)"},{svg:M.isoleucine,lb:"Isoleucine (I)"},{svg:M.methionine,lb:"Méthionine (M)"}],c:0,
+   fb:"La <strong>leucine (L)</strong> a un radical R = <strong>–CH₂–CH(CH₃)₂</strong> : une chaîne de 2 carbones terminée par un groupe isopropyle. AA indispensable, le plus abondant dans les protéines humaines. Différence vs valine : un –CH₂– supplémentaire entre le Cα et le carbone branché."},
+
+  {num:5,top:"AA aliphatique",q:"Identifiez l'Isoleucine — R doublement ramifié avec deux carbones méthyle sur des carbones différents :",
+   opts:[{svg:M.valine,lb:"Valine (V)"},{svg:M.leucine,lb:"Leucine (L)"},{svg:M.isoleucine,lb:"Isoleucine (I)"},{svg:M.alanine,lb:"Alanine (A)"}],c:2,
+   fb:"L'<strong>isoleucine (I)</strong> a deux méthyles sur des carbones différents (Cβ et Cγ). Contrairement à la valine (deux méthyles sur le même Cβ). AA indispensable avec 2 carbones asymétriques → 4 stéréoisomères possibles."},
+
+  {num:6,top:"AA hydroxylé",q:"Identifiez la Sérine — R = –CH₂–OH (le plus court des hydroxylés) :",
+   opts:[{svg:M.threonine,lb:"Thréonine (T)"},{svg:M.serine,lb:"Sérine (S)"},{svg:M.cysteine,lb:"Cystéine (C)"},{svg:M.alanine,lb:"Alanine (A)"}],c:1,
+   fb:"La <strong>sérine (S)</strong> a R = <strong>–CH₂–OH</strong>. AA hydroxylé, polaire. Phosphorylable par les sérine-kinases (régulation enzymatique majeure). Non indispensable (synthétisable à partir du glucose)."},
+
+  {num:7,top:"AA hydroxylé",q:"Identifiez la Thréonine — R = –CH(OH)–CH₃ (hydroxylé avec un méthyle) :",
+   opts:[{svg:M.serine,lb:"Sérine (S)"},{svg:M.threonine,lb:"Thréonine (T)"},{svg:M.valine,lb:"Valine (V)"},{svg:M.glutamine,lb:"Glutamine (Q)"}],c:1,
+   fb:"La <strong>thréonine (T)</strong> a R = <strong>–CH(OH)–CH₃</strong>. Hydroxylée + méthyle → 2 carbones asymétriques. AA indispensable, phosphorylable. Différence vs sérine : présence d'un méthyle supplémentaire."},
+
+  {num:8,top:"AA soufré",q:"Identifiez la Cystéine — R = –CH₂–SH (thiol, forme des ponts disulfure) :",
+   opts:[{svg:M.methionine,lb:"Méthionine (M)"},{svg:M.serine,lb:"Sérine (S)"},{svg:M.threonine,lb:"Thréonine (T)"},{svg:M.cysteine,lb:"Cystéine (C)"}],c:3,
+   fb:"La <strong>cystéine (C)</strong> a R = <strong>–CH₂–SH</strong> (thiol). Par oxydation : 2 cystéines → pont disulfure –S–S– (stabilisation tertiaire covalente). La méthionine a aussi du soufre (–S–CH₃) mais ne peut pas former de pont disulfure."},
+
+  {num:9,top:"AA soufré",q:"Identifiez la Méthionine — R = –CH₂–CH₂–S–CH₃ (thioéther, donneur de méthyle) :",
+   opts:[{svg:M.cysteine,lb:"Cystéine (C)"},{svg:M.methionine,lb:"Méthionine (M)"},{svg:M.glutamate,lb:"Ac. Glutamique (E)"},{svg:M.leucine,lb:"Leucine (L)"}],c:1,
+   fb:"La <strong>méthionine (M)</strong> a R = <strong>–CH₂–CH₂–S–CH₃</strong> (thioéther). Donneur de méthyle universel via la S-adénosylméthionine (SAM). AA indispensable. La méthionine est aussi l'AA d'initiation de toute traduction protéique (codon AUG)."},
+
+  {num:10,top:"AA acide",q:"Identifiez l'Acide Aspartique — R = –CH₂–COOH (le plus court des acides, 1 carbone) :",
+   opts:[{svg:M.glutamate,lb:"Ac. Glutamique (E)"},{svg:M.aspartate,lb:"Ac. Aspartique (D)"},{svg:M.asparagine,lb:"Asparagine (N)"},{svg:M.glutamine,lb:"Glutamine (Q)"}],c:1,
+   fb:"L'<strong>acide aspartique (D)</strong> a R = <strong>–CH₂–COOH</strong> (1 seul carbone entre Cα et –COOH). Chargé négativement (–COO⁻) à pH 7 (pKa ≈ 3,9). Différence vs acide glutamique : 1 CH₂ de moins dans la chaîne latérale."},
+
+  {num:11,top:"AA dérivé amide",q:"Identifiez l'Asparagine — R = –CH₂–CO–NH₂ (dérivé amide de l'acide aspartique) :",
+   opts:[{svg:M.asparagine,lb:"Asparagine (N)"},{svg:M.glutamine,lb:"Glutamine (Q)"},{svg:M.aspartate,lb:"Ac. Aspartique (D)"},{svg:M.glutamate,lb:"Ac. Glutamique (E)"}],c:0,
+   fb:"L'<strong>asparagine (N)</strong> est le dérivé amide de l'acide aspartique : R = <strong>–CH₂–CO–NH₂</strong>. Neutre (vs Asp chargé–). Détoxifiante pour l'ammoniac cellulaire. La glutamine est l'homologue avec une chaîne plus longue (2 CH₂ au lieu de 1)."},
+
+  {num:12,top:"AA acide",q:"Identifiez l'Acide Glutamique — R = –CH₂–CH₂–COOH (2 carbones avant le –COOH) :",
+   opts:[{svg:M.aspartate,lb:"Ac. Aspartique (D)"},{svg:M.glutamine,lb:"Glutamine (Q)"},{svg:M.glutamate,lb:"Ac. Glutamique (E)"},{svg:M.lysine,lb:"Lysine (K)"}],c:2,
+   fb:"L'<strong>acide glutamique (E)</strong> a R = <strong>–CH₂–CH₂–COOH</strong> (2 carbones entre Cα et –COOH). Chargé négativement à pH 7 (pKa ≈ 4,1). Un CH₂ de plus que l'acide aspartique. La glutamine synthétase transforme Glu + NH₃ + ATP → Gln."},
+
+  {num:13,top:"AA dérivé amide",q:"Identifiez la Glutamine — R = –CH₂–CH₂–CO–NH₂ (dérivé amide de l'acide glutamique) :",
+   opts:[{svg:M.asparagine,lb:"Asparagine (N)"},{svg:M.glutamine,lb:"Glutamine (Q)"},{svg:M.glutamate,lb:"Ac. Glutamique (E)"},{svg:M.lysine,lb:"Lysine (K)"}],c:1,
+   fb:"La <strong>glutamine (Q)</strong> est le dérivé amide de l'acide glutamique : R = <strong>–(CH₂)₂–CO–NH₂</strong>. Neutre. Rôle majeur dans le transport de l'azote et la détoxification de NH₃. La plus abondante dans le plasma humain."},
+
+  {num:14,top:"AA basique",q:"Identifiez la Lysine — R = –(CH₂)₄–NH₂ (longue chaîne avec amine terminale) :",
+   opts:[{svg:M.arginine,lb:"Arginine (R)"},{svg:M.histidine,lb:"Histidine (H)"},{svg:M.glutamine,lb:"Glutamine (Q)"},{svg:M.lysine,lb:"Lysine (K)"}],c:3,
+   fb:"La <strong>lysine (K)</strong> a R = <strong>–(CH₂)₄–NH₂</strong> (4 carbones + amine ε). Chargée positivement à pH 7 (pKa ≈ 10,5). AA indispensable. Souvent limitante dans les protéines végétales (céréales). Impliquée dans la formation des ponts du collagène."},
+
+  {num:15,top:"AA basique",q:"Identifiez l'Arginine — R avec groupement guanidyle (–C(=NH)–NH₂) très basique :",
+   opts:[{svg:M.lysine,lb:"Lysine (K)"},{svg:M.arginine,lb:"Arginine (R)"},{svg:M.histidine,lb:"Histidine (H)"},{svg:M.glutamine,lb:"Glutamine (Q)"}],c:1,
+   fb:"L'<strong>arginine (R)</strong> a un <strong>groupement guanidyle</strong> (–NH–C(=NH)–NH₂) → pKa ≈ 12,5 → toujours chargée positivement au pH physiologique (l'AA le plus basique). Précurseur du monoxyde d'azote (NO) via la NO-synthase."},
+
+  {num:16,top:"AA basique",q:"Identifiez l'Histidine — R avec noyau imidazole à 5 chaînons :",
+   opts:[{svg:M.arginine,lb:"Arginine (R)"},{svg:M.lysine,lb:"Lysine (K)"},{svg:M.histidine,lb:"Histidine (H)"},{svg:M.tryptophane,lb:"Tryptophane (W)"}],c:2,
+   fb:"L'<strong>histidine (H)</strong> a un noyau <strong>imidazole</strong> (cycle à 5 chaînons avec 2 N). pKa ≈ 6,0 → partiellement ionisée à pH 7 → excellent tampon physiologique. Résidu catalytique essentiel dans de nombreuses enzymes (chymotrypsine, ribonucléase…)."},
+
+  {num:17,top:"AA aromatique",q:"Identifiez la Phénylalanine — R avec noyau benzénique pur (sans substituant) :",
+   opts:[{svg:M.tyrosine,lb:"Tyrosine (Y)"},{svg:M.tryptophane,lb:"Tryptophane (W)"},{svg:M.phenylalanine,lb:"Phénylalanine (F)"},{svg:M.histidine,lb:"Histidine (H)"}],c:2,
+   fb:"La <strong>phénylalanine (F)</strong> a un <strong>groupement phényl</strong> (benzène pur, sans substituant). AA indispensable, apolaire. Absorbe à 257 nm. Précurseur de la tyrosine (phénylalaninhydroxylase). Déficit en phénylalaninhydroxylase → phénylcétonurie (PCU)."},
+
+  {num:18,top:"AA aromatique",q:"Identifiez la Tyrosine — R avec noyau phénol (benzène + –OH) :",
+   opts:[{svg:M.phenylalanine,lb:"Phénylalanine (F)"},{svg:M.tyrosine,lb:"Tyrosine (Y)"},{svg:M.tryptophane,lb:"Tryptophane (W)"},{svg:M.serine,lb:"Sérine (S)"}],c:1,
+   fb:"La <strong>tyrosine (Y)</strong> a un groupement <strong>phénol</strong> (benzène + –OH). Polaire. Phosphorylable par les tyrosine-kinases (signalisation cellulaire). Absorbe à 274 nm. Précurseur des catécholamines (dopamine, adrénaline) et de la mélanine."},
+
+  {num:19,top:"AA aromatique",q:"Identifiez le Tryptophane — R avec noyau indole bicyclique (benzène fusionné à un pyrrole) :",
+   opts:[{svg:M.phenylalanine,lb:"Phénylalanine (F)"},{svg:M.histidine,lb:"Histidine (H)"},{svg:M.tyrosine,lb:"Tyrosine (Y)"},{svg:M.tryptophane,lb:"Tryptophane (W)"}],c:3,
+   fb:"Le <strong>tryptophane (W)</strong> a un noyau <strong>indole bicyclique</strong> (benzène fusionné à un pyrrole avec –NH). AA indispensable le plus volumineux. Fortement fluorescent (émission ≈ 350 nm). Principal responsable de l'absorption des protéines à <strong>280 nm</strong>. Précurseur de la sérotonine et de la mélatonine."},
+
+  {num:20,top:"Acide iminé",q:"Identifiez la Proline — R forme un cycle pyrrolidine avec l'azote (acide iminé) :",
+   opts:[{svg:M.histidine,lb:"Histidine (H)"},{svg:M.proline,lb:"Proline (P)"},{svg:M.alanine,lb:"Alanine (A)"},{svg:M.lysine,lb:"Lysine (K)"}],c:1,
+   fb:"La <strong>proline (P)</strong> est unique : son azote N est intégré dans un <strong>cycle pyrrolidine</strong> à 5 chaînons → amine secondaire (acide iminé). Elle <em>brise</em> les hélices α et les feuillets β. Avec la ninhydrine → couleur <strong>jaune</strong> (tous les autres AA donnent violet). Abondante dans le collagène sous forme d'hydroxyproline."},
+];
+
+/* ══════════════════════════════════
+   EXERCICE 3 — 10 CLASSIFICATION
+══════════════════════════════════ */
+const D3=[
+  {num:1,top:"Classification",q:"Glycine, Alanine, Valine, Leucine, Isoleucine → groupe :",
+   aas:["Gly (G)","Ala (A)","Val (V)","Leu (L)","Ile (I)"],
+   opts:["a) Aliphatiques (R = C,H)","b) Hydroxylés (–OH)","c) Soufrés (S)","d) Aromatiques"],c:0,
+   fb:"Groupe <strong>a) Aliphatiques</strong> : R ne contient que C et H → apolaires, hydrophobes. On les retrouve enfouis dans le cœur hydrophobe des protéines. La glycine (R=H) est le plus simple, l'isoleucine le plus ramifié."},
+  {num:2,top:"Classification",q:"Sérine (–CH₂–OH) et Thréonine (–CH(OH)–CH₃) → groupe :",
+   aas:["Sérine (S)","Thréonine (T)"],
+   opts:["a) Aliphatiques","b) Hydroxylés (R = –OH)","c) Soufrés","f) Aromatiques"],c:1,
+   fb:"Groupe <strong>b) Hydroxylés</strong> : R porte un –OH → polaires, phosphorylables par les kinases. La sérine et la thréonine sont des cibles importantes de la signalisation cellulaire (phosphorylation/déphosphorylation)."},
+  {num:3,top:"Classification",q:"Cystéine (–SH) et Méthionine (–S–CH₃) → groupe :",
+   aas:["Cystéine (C)","Méthionine (M)"],
+   opts:["a) Aliphatiques","b) Hydroxylés","c) Soufrés (R = S)","e) Basiques"],c:2,
+   fb:"Groupe <strong>c) Soufrés</strong>. Cystéine : pont disulfure par oxydation (–S–S–). Méthionine : donneur de méthyle universel via SAM. La méthionine est l'AA d'initiation de toute traduction (codon AUG)."},
+  {num:4,top:"Classification",q:"Acide Aspartique, Asparagine, Acide Glutamique, Glutamine → groupe :",
+   aas:["Asp (D)","Asn (N)","Glu (E)","Gln (Q)"],
+   opts:["e) Basiques (+)","f) Aromatiques","d) Acides / dérivés amides","a) Aliphatiques"],c:2,
+   fb:"Groupe <strong>d) Acides et dérivés amides</strong>. Asp et Glu : –COOH → chargés – à pH 7. Asn et Gln : –CO–NH₂ → neutres (dérivés amides). La glutamine est le transporteur principal de l'azote dans le sang."},
+  {num:5,top:"Classification",q:"Lysine (–(CH₂)₄–NH₂), Arginine (guanidyle), Histidine (imidazole) → groupe :",
+   aas:["Lys (K)","Arg (R)","His (H)"],
+   opts:["a) Aliphatiques","e) Basiques (R = dérivé –NH₂)","d) Acides","c) Soufrés"],c:1,
+   fb:"Groupe <strong>e) Basiques</strong> : R chargé positivement à pH 7. Lys (pKa≈10,5), Arg (pKa≈12,5 — toujours +), His (pKa≈6,0 — tampon physiologique et résidu catalytique des enzymes)."},
+  {num:6,top:"Classification",q:"Phénylalanine (phényl), Tyrosine (phénol), Tryptophane (indole) → groupe :",
+   aas:["Phe (F)","Tyr (Y)","Trp (W)"],
+   opts:["a) Aliphatiques","b) Hydroxylés","e) Basiques","f) Aromatiques (noyau aromatique)"],c:3,
+   fb:"Groupe <strong>f) Aromatiques</strong> : R contient un noyau aromatique. Phe (phényl), Tyr (phénol), Trp (indole). Ces 3 AA absorbent les UV → dosage des protéines à 280 nm."},
+  {num:7,top:"Acide iminé",q:"La Proline se distingue de tous les autres AA car son azote est :",
+   aas:["Proline (P)"],
+   opts:["Un amine primaire libre –NH₂","Intégré dans un cycle (pyrrolidine) — acide iminé","Lié à un noyau aromatique","Porteur d'un groupement guanidyle"],c:1,
+   fb:"La <strong>proline</strong> est un <strong>acide iminé</strong> : son N est dans un cycle pyrrolidine (amine secondaire). Elle brise les hélices α. Avec la ninhydrine → couleur <strong>jaune</strong> (tous les autres AA = violet)."},
+  {num:8,top:"AA indispensables",q:"Parmi ces 4 AA, lequel N'EST PAS indispensable pour l'Homme adulte ?",
+   aas:["Valine","Lysine","Sérine","Tryptophane"],
+   opts:["Valine","Lysine","Sérine","Tryptophane"],c:2,
+   fb:"La <strong>sérine</strong> n'est pas indispensable : synthétisable à partir du glucose via la 3-phosphoglycérate. Les 8 indispensables : Val, Leu, Ile, Thr, Met, Lys, Phe, Trp."},
+  {num:9,top:"Absorption UV",q:"Quel groupe d'AA permet de doser les protéines par absorbance à 280 nm ?",
+   aas:["Phénylalanine (F)","Tyrosine (Y)","Tryptophane (W)"],
+   opts:["Aliphatiques","Soufrés","Aromatiques","Basiques"],c:2,
+   fb:"Les <strong>AA aromatiques</strong> absorbent les UV. Le tryptophane absorbe le plus fortement à 280 nm → méthode rapide de dosage des protéines (A₂₈₀). La fluorescence du Trp (émission 350 nm) est utilisée pour étudier le repliement protéique."},
+  {num:10,top:"Spécificité enzymatique",q:"La chymotrypsine coupe après les résidus appartenant au groupe :",
+   aas:["Phénylalanine (F)","Tyrosine (Y)","Tryptophane (W)"],
+   opts:["Aliphatiques (Val, Leu)","Basiques (Lys, Arg)","Soufrés (Cys, Met)","Aromatiques (Phe, Tyr, Trp)"],c:3,
+   fb:"La <strong>chymotrypsine</strong> reconnaît les résidus <strong>aromatiques</strong> volumineux (Phe, Tyr, Trp) qui s'insèrent dans sa poche hydrophobe. Elle coupe après leur –CO–. La trypsine coupe après les basiques (Lys, Arg). Le BrCN coupe après Met."},
+];
+
+/* ══════════════════════════════════
+   ÉTAT GLOBAL
+══════════════════════════════════ */
+const ST={
+  1:{c:0,a:new Set(),tot:10},
+  2:{c:0,a:new Set(),tot:20},
+  3:{c:0,a:new Set(),tot:10}
+};
+
+function updG(){
+  const t=ST[1].a.size+ST[2].a.size+ST[3].a.size;
+  document.getElementById('gA').textContent=t;
+  document.getElementById('gP').textContent=Math.round(t/40*100)+'%';
+}
+function updS(ex){
+  const s=ST[ex],n=s.a.size,tot=s.tot;
+  document.getElementById('s'+ex).textContent=s.c+'/'+tot;
+  document.getElementById('pl'+ex).textContent=n+' / '+tot+' répondues';
+  document.getElementById('pf'+ex).style.width=(n/tot*100)+'%';
+  if(ex===2) updDots();
+  updG();
+}
+
+/* dots for ex2 */
+function updDots(){
+  const wrap=document.getElementById('aaDots');
+  if(!wrap)return;
+  const names=['Gly','Ala','Val','Leu','Ile','Ser','Thr','Cys','Met','Asp','Asn','Glu','Gln','Lys','Arg','His','Phe','Tyr','Trp','Pro'];
+  wrap.innerHTML=names.map((n,i)=>{
+    const num=i+1;
+    let cls='aa-dot';
+    if(ST[2].a.has(num)){
+      const q=D2.find(x=>x.num===num);
+      cls+=' done-ok'; // simplified: always green if answered (wrong shows red via state)
+    }
+    return`<span class="${cls}" title="${n}"></span>`;
+  }).join('');
+  // update colors based on correctness
+  ST[2].a.forEach(num=>{
+    const dot=wrap.children[num-1];
+    if(dot){
+      const wasCorrect=dot.classList.contains('done-ok');
+      // recheck from card state
+    }
+  });
+}
+
+/* ══════════════════════════════════
+   RENDER
+══════════════════════════════════ */
+function rEx1(){
+  const c=document.getElementById('c1');c.innerHTML='';
+  const L=['A','B','C','D'];
+  D1.forEach(q=>{
+    const d=document.createElement('div');d.className='qc';d.dataset.num=q.num;
+    d.innerHTML=`<div class="qc-hd"><div class="qnum">${q.num}</div><div style="flex:1"><div class="qtop">${q.top}</div><div class="qq">${q.q}</div></div></div>
+    <div class="opts">${q.opts.map((o,i)=>`<button class="opt" onclick="ans(1,${q.num},${i})"><span class="oltr">${L[i]}</span>${o}</button>`).join('')}</div>
+    <div class="fbx" id="f1-${q.num}"></div>`;
+    c.appendChild(d);
+  });
+}
+
+function rEx2(){
+  const c=document.getElementById('c2');c.innerHTML='';
+  D2.forEach(q=>{
+    const d=document.createElement('div');d.className='sc';d.dataset.num=q.num;
+    d.innerHTML=`<div class="sc-hd"><div class="snum">${q.num}</div><div style="flex:1"><div class="stop">${q.top}</div><div class="sq">${q.q}</div></div></div>
+    <div class="sg">${q.opts.map((o,i)=>`<div class="so" onclick="ans(2,${q.num},${i})">${o.svg}<div class="sl">${o.lb}</div></div>`).join('')}</div>
+    <div class="sfb" id="f2-${q.num}"></div>`;
+    c.appendChild(d);
+  });
+  // init dots
+  const wrap=document.getElementById('aaDots');
+  const names=['Gly','Ala','Val','Leu','Ile','Ser','Thr','Cys','Met','Asp','Asn','Glu','Gln','Lys','Arg','His','Phe','Tyr','Trp','Pro'];
+  wrap.innerHTML=names.map(n=>`<span class="aa-dot" title="${n}"></span>`).join('');
+}
+
+function rEx3(){
+  const c=document.getElementById('c3');c.innerHTML='';
+  D3.forEach(q=>{
+    const d=document.createElement('div');d.className='cc';d.dataset.num=q.num;
+    d.innerHTML=`<div class="cc-hd"><div class="cnum">${q.num}</div><div style="flex:1"><div class="ctop">${q.top}</div><div class="cq">${q.q}</div></div></div>
+    <div class="chips">${q.aas.map(a=>`<span class="chip">${a}</span>`).join('')}</div>
+    <div class="copts">${q.opts.map((o,i)=>`<button class="copt" onclick="ans(3,${q.num},${i})">${o}</button>`).join('')}</div>
+    <div class="cfb" id="f3-${q.num}"></div>`;
+    c.appendChild(d);
+  });
+}
+
+/* ══════════════════════════════════
+   ANSWER
+══════════════════════════════════ */
+function ans(ex,num,idx){
+  if(ST[ex].a.has(num))return;
+  ST[ex].a.add(num);
+  const D=ex===1?D1:ex===2?D2:D3;
+  const q=D.find(x=>x.num===num);
+  const cc=ex===1?'qc':ex===2?'sc':'cc';
+  const oc=ex===1?'opt':ex===2?'so':'copt';
+  const card=document.querySelector(`.${cc}[data-num="${num}"]`);
+  const opts=card.querySelectorAll('.'+oc);
+  const fb=document.getElementById(`f${ex}-${num}`);
+  const ok=idx===q.c;
+  if(ok)ST[ex].c++;
+  opts.forEach((o,i)=>{
+    o.classList.add('dis');
+    if(i===q.c)o.classList.add(i===idx?'cor':'sho');
+    else if(i===idx)o.classList.add('wrg');
+  });
+  card.classList.add(ok?'ok':'no');
+  const lbl=ex===2?D2.find(x=>x.num===num).opts[q.c].lb:q.opts[q.c];
+  fb.innerHTML=ok?`<span class="okt">✓ Bonne réponse !</span>  ${q.fb}`:`<span class="not">✗ Incorrect.</span> Bonne réponse : <strong>${lbl}</strong>.  ${q.fb}`;
+  fb.classList.add('vis');
+  // update dot for ex2
+  if(ex===2){
+    const wrap=document.getElementById('aaDots');
+    if(wrap&&wrap.children[num-1]){
+      wrap.children[num-1].style.background=ok?'var(--em)':'var(--red)';
+    }
+  }
+  updS(ex);
+}
+
+/* ══════════════════════════════════
+   RESET
+══════════════════════════════════ */
+function reset(ex){
+  ST[ex]={c:0,a:new Set(),tot:ST[ex].tot};
+  if(ex===1)rEx1();else if(ex===2)rEx2();else rEx3();
+  updS(ex);
+}
+
+/* ══════════════════════════════════
+   TABS
+══════════════════════════════════ */
+function showTab(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('a'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('a');
+}
+
+/* INIT */
+rEx1();rEx2();rEx3();
+updS(1);updS(2);updS(3);
+</script>
+</body>
+</html>
