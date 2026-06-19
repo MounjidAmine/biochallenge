@@ -12,7 +12,8 @@ import studentRoutes from './routes/student.js';
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const uploadDir = path.resolve(__dirname, '..', env.uploadDir);
+const bundledUploadDir = path.resolve(__dirname, '..', env.uploadDir);
+const runtimeUploadDir = process.env.VERCEL ? path.join('/tmp', env.uploadDir) : bundledUploadDir;
 
 app.use(
   cors({
@@ -27,7 +28,10 @@ app.use(
   }),
 );
 app.use(express.json({ limit: '2mb' }));
-app.use('/uploads', express.static(uploadDir));
+app.use('/uploads', express.static(runtimeUploadDir));
+if (runtimeUploadDir !== bundledUploadDir) {
+  app.use('/uploads', express.static(bundledUploadDir));
+}
 
 app.get('/health', async (_req, res, next) => {
   try {
