@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const defaultApiUrl = import.meta.env.DEV ? 'http://localhost:4000' : 'https://biochallenge-api.vercel.app';
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:4000',
+  baseURL: import.meta.env.VITE_API_URL || defaultApiUrl,
 });
 
 api.interceptors.request.use((config) => {
